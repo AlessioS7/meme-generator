@@ -30,15 +30,15 @@ passport.use(new LocalStrategy(
 
 // serialize and de-serialize the user (user object <-> session)
 // we serialize the user id and we store it in the session: the session is very small in this way
-passport.serializeUser((user, done) => {
-  done(null, user.username);
+passport.serializeUser((username, done) => {
+  done(null, username);
 });
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 // starting from the data in the session, we extract the current (logged-in) username
 passport.deserializeUser((username, done) => {
-    done(null, username); // this will be available in req.user
+  done(null, username); // this will be available in req.user
 });
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -94,7 +94,7 @@ app.get('/api/memes',
   [],
   async (req, res) => {
     try {
-      const result = await memeDao.listMemes(true/* req.isAuthenticated() */);
+      const result = await memeDao.listMemes(req.isAuthenticated());
 
       if (result.error)
         res.status(404).json(result);
@@ -109,7 +109,7 @@ app.get('/api/memes',
 
 // POST /api/memes (create meme)
 app.post('/api/memes',
-  /* isLoggedIn, */
+  isLoggedIn,
   [
     check('title').isLength({ min: 1, max: 160 }),
     check('image').isLength({ min: 1, max: 20 }),
@@ -144,17 +144,17 @@ app.post('/api/memes',
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 // DELETE /api/memes/<id> (delete a meme)
-app.delete('/api/memes/:id', 
-  /* isLoggedIn, */ 
-  [ check('id').isInt() ], 
+app.delete('/api/memes/:id',
+  isLoggedIn,
+  [check('id').isInt()],
   async (req, res) => {
-  try {
-    await memeDao.deleteMeme(req.params.id);
-    res.status(200).json({}); 
-  } catch (err) {
-    res.status(503).json({ error: `Database error during the deletion of meme ${req.params.id}` });
-  }
-});
+    try {
+      await memeDao.deleteMeme(req.params.id);
+      res.status(200).json({});
+    } catch (err) {
+      res.status(503).json({ error: `Database error during the deletion of meme ${req.params.id}` });
+    }
+  });
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 /*** USERS APIs ***/
@@ -194,10 +194,11 @@ app.delete('/api/sessions/current', (req, res) => {
 // GET /sessions/current
 // check whether the user is logged in or not
 app.get('/api/sessions/current', (req, res) => {
-  if(req.isAuthenticated()) {
-    res.status(200).json(req.user);}
+  if (req.isAuthenticated()) {
+    res.status(200).json(req.user);
+  }
   else
-    res.status(401).json({error: 'Unauthenticated user!'});;
+    res.status(401).json({ error: 'Unauthenticated user!' });;
 });
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
