@@ -176,7 +176,7 @@ app.post('/api/sessions', function (req, res, next) {
 
       // req.username contains the authenticated username that we send back
       // this is coming from userDao.getUser()
-      return res.json(req.username);
+      return res.json(user);
     });
   })(req, res, next);
 });
