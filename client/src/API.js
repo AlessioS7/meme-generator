@@ -38,6 +38,18 @@ async function logOut() {
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
+async function getUserInfo() {
+    const response = await fetch('/sessions/current');
+    const userInfo = await response.json();
+    if (response.ok) {
+        return userInfo;
+    } else {
+        throw userInfo;  // an object with the error coming from the server, mostly unauthenticated user
+    }
+}
+
+/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
 async function getMemes() {
     const response = await fetch('/api/memes');
     if (response.ok) {

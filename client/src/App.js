@@ -7,6 +7,7 @@ import Navigation from './components/Navigation';
 import API from './API'
 import { LoginForm } from './components/Login';
 import MemesList from './components/MemesList';
+import TemplatesList from './components/CreateMeme';
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
@@ -48,13 +49,29 @@ const Main = () => {
 
   //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
+  // check if user is authenticated
+  useEffect(() => {
+    const checkAuth = async () => {
+      try {
+        // here you have the user info, if already logged in
+        const user = await API.getUserInfo();
+        setUser(user);
+        setLoggedIn(true);
+      } catch (err) {
+        console.log("No logged user"); // mostly unauthenticated user
+      }
+    };
+    checkAuth();
+  }, []);
+
+  //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
   useEffect(() => {
     if (dirty) {
       API.getMemes()
         .then(memes => {
           setMemesList(memes);
           setDirty(false);
-          console.log(memes);
         })
         .catch(e => handleErrors(e));
     }
@@ -107,7 +124,7 @@ const Main = () => {
         </Route>
         <Route path="/createMeme">
           <Row className="vh-100 below-nav">
-            <h1>CREATE A NEW POST</h1>
+            <TemplatesList></TemplatesList>
           </Row>
         </Route>
       </Switch>

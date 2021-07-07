@@ -8,7 +8,7 @@ function importAll(r) {
 }
 
 const images = importAll(require.context('./images', false, /\.(png|jpe?g|svg)$/));
-
+console.log(images);
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 const MemeWrapper = (props) => {
@@ -17,8 +17,14 @@ const MemeWrapper = (props) => {
 
 const Drake = (props) => {
     return (
-        <Col className="previewMeme">  
-            <img src={images[props.meme.image].default}/>
+        <Col className="previewMeme clickable" >
+            <img src={images[props.meme.image].default} />
+            <p style={{
+                position: 'absolute',
+                top: '17%',
+                left: '53%',
+                marginRight: '20px'
+            }}>HELLO From the other side of the road</p>
         </Col>
     );
 }
