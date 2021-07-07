@@ -3,7 +3,7 @@ import logo from '../logo.png';
 import { LogoutButton } from './Login';
 
 const Navigation = (props) => {
-    const { onLogOut, changeRoute, logInForm, loggedIn, user } = props;
+    const { onLogOut, changeRoute, route, loggedIn, user } = props;
 
     return (
         <Navbar bg="dark" variant="dark" fixed="top" expand="lg" className="justify-content-between">
@@ -11,7 +11,7 @@ const Navigation = (props) => {
                 <Image src={logo} roundedCircle width={50} height={50} alt="50x50" className="mr-2" />
                 Meme Generator
             </Navbar.Brand>
-            {logInForm ? <></> : loggedIn ?
+            {route === "login" ? <></> : loggedIn ?
                 <div>
                     <Navbar.Text className="mr-3">Welcome, {user}!</Navbar.Text>
                     {window.location.pathname.endsWith("/") ?

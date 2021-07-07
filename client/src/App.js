@@ -6,6 +6,7 @@ import { Container, Row, Col } from 'react-bootstrap/';
 import Navigation from './components/Navigation';
 import API from './API'
 import { LoginForm } from './components/Login';
+import MemesList from './components/MemesList';
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
@@ -23,6 +24,10 @@ const Main = () => {
   const [loggedIn, setLoggedIn] = useState(false); // at the beginning, no user is logged in
   const [user, setUser] = useState(null);
   const [route, setRoute] = useState("");
+  const [memesList, setMemesList] = useState([]);
+  const [dirty, setDirty] = useState(true);
+  const [message, setMessage] = useState('');
+
   const history = useHistory();
 
   //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -35,12 +40,35 @@ const Main = () => {
 
   //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
+  // show error message in toast
+  const handleErrors = (err) => {
+    setMessage({ msg: err.error, type: 'danger' });
+    console.log(err);
+  }
+
+  //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+  useEffect(() => {
+    if (dirty) {
+      API.getMemes()
+        .then(memes => {
+          setMemesList(memes);
+          setDirty(false);
+          console.log(memes);
+        })
+        .catch(e => handleErrors(e));
+    }
+  }, [dirty, loggedIn])
+
+  //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
   const handleLogIn = async (credentials) => {
     try {
       const user = await API.logIn(credentials);
       setUser(user);
       setLoggedIn(true);
       setRoute("");
+      setDirty(true);
     }
     catch (err) {
       // error is handled and visualized in the login form, do not manage error, throw it
@@ -56,14 +84,15 @@ const Main = () => {
     // clean up everything
     setLoggedIn(false);
     setUser(null);
-    /*     setTaskList([]);
-        setDirty(true); */
+    setDirty(true);
   }
+
+  //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
   return (
     <Container fluid>
       <Row>
-        <Navigation onLogOut={handleLogOut} changeRoute={changeRoute} setRoute={setRoute} loggedIn={loggedIn} user={user} />
+        <Navigation onLogOut={handleLogOut} changeRoute={changeRoute} route={route} loggedIn={loggedIn} user={user} />
       </Row>
       <Switch>
         <Route path="/login">
@@ -73,7 +102,7 @@ const Main = () => {
         </Route>
         <Route exact path="/">
           <Row className="vh-100 below-nav">
-            <h1>HOME</h1>
+            <MemesList list={memesList}></MemesList>
           </Row>
         </Route>
         <Route path="/createMeme">

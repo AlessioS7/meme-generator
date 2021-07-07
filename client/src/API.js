@@ -15,10 +15,11 @@ async function logIn(credentials) {
         body: JSON.stringify(credentials),
     });
     if (response.ok) {
-        const user = await response.json(); // json parse from json format to JS Object
+        const user = await response.json(); // the json function parse from json format to JS Object
         return user;
     }
     else {
+        // ERROR HANDLING
         try {
             const errDetail = await response.json();
             throw errDetail.message;
@@ -35,5 +36,25 @@ async function logOut() {
     await fetch('/api/sessions/current', { method: 'DELETE' });
 }
 
-const API = { logIn, logOut}
+/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+async function getMemes() {
+    const response = await fetch('/api/memes');
+    if (response.ok) {
+        const memes = await response.json();
+        return memes;
+    }
+    else {
+        // ERROR HANDLING
+        try {
+            const errDetail = await response.json();
+            throw errDetail.message;
+        }
+        catch (err) {
+            throw err;
+        }
+    }
+}
+
+const API = { logIn, logOut, getMemes }
 export default API;
