@@ -1,5 +1,5 @@
 import { Container, Row, Col } from 'react-bootstrap';
-import MemeWrapper from './Memes'
+import MemeWrapper from './Memes';
 
 const MemesList = (props) => {
     const { list } = props;

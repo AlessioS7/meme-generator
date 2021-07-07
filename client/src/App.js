@@ -124,7 +124,7 @@ const Main = () => {
         </Route>
         <Route path="/createMeme">
           <Row className="vh-100 below-nav">
-            <TemplatesList></TemplatesList>
+          {!loggedIn ? <Redirect to="/" /> : <TemplatesList></TemplatesList>}
           </Row>
         </Route>
       </Switch>
