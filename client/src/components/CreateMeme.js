@@ -17,12 +17,12 @@ const TemplatesList = (props) => {
 
     return (
         <Container>
-            <h2>Select a template image:</h2>
+            <h2 className="mb-4">Select a template image:</h2>
             <Row xs={3} md={4}>
                 {list.map(template => {
                     return (
                         <Col className="previewMeme clickable">
-                            <img src={template} />
+                            <img src={template} style={{height: '255px'}}/>
                         </Col>
                     );
                 })}

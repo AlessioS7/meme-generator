@@ -17,14 +17,14 @@ const MemeWrapper = (props) => {
 
 const Drake = (props) => {
     return (
-        <Col className="previewMeme clickable" >
-            <img src={images[props.meme.image].default} />
-            <p style={{
-                position: 'absolute',
-                top: '17%',
-                left: '53%',
-                marginRight: '20px'
-            }}>HELLO From the other side of the road</p>
+        <Col className="previewMeme clickable">
+            <img src={images[props.meme.image].default} style={{height: '350px'}}/>
+            <p className="center" style={{
+                top: '2%',
+            }}>HELLO From the other adfaj ifaodj ai daifj kdsaljf jaskflj klajf lakjfdlka j idhfodah</p>
+            <p className="center" style={{
+                top: '51%',
+            }}>HELLO From the other adfaj ifaodj aiah</p>
         </Col>
     );
 }

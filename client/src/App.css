@@ -50,7 +50,7 @@
 }
 
 .previewMeme {
-  margin-bottom: 10px;
+  margin-bottom: 1.8em;
 }
 
 .previewMeme img {
@@ -66,9 +66,21 @@
 }
 
 .clickable:hover {
-  opacity: 0.7;
+  opacity: 0.8;
 }
 
 .below-nav {
   padding-top: 5.5rem;
+}
+
+.center {   
+  display: flex;  
+  justify-content: center;
+  align-items: center;
+  height: 50%; 
+  text-align: center;        
+  position: absolute;
+  left: 52%;
+  max-height: 47%;
+  max-width: 42%;
 }
