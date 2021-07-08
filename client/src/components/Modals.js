@@ -1,5 +1,7 @@
 import { Modal, Button, Col, Row, Alert, Form } from 'react-bootstrap';
 import MemeWrapper from './Memes';
+import { useState } from 'react';
+import ColorPicker from './ColorPicker';
 
 function importAll(r) {
     let images = {};
@@ -35,8 +37,6 @@ const Protected = () => {
 const ModalHome = (props) => {
     const { show, selectedMeme, closeModal, user } = props;
 
-    console.log(selectedMeme.image + " return value: " + modalSize(selectedMeme.image));
-
     return (
         <Modal show={show} onHide={closeModal} centered size={modalSize(selectedMeme.image) ? "lg" : "md"} >
             < Modal.Header closeButton >
@@ -45,7 +45,7 @@ const ModalHome = (props) => {
             <Modal.Body><MemeWrapper meme={selectedMeme} style={{ height: '100%', width: '100%' }} /></Modal.Body>
             <Modal.Footer>
                 <span className="rel-left">Author: {selectedMeme.creator} <span class="tab-space">&nbsp;</span>
-                    {selectedMeme.public ? <Public/> : <Protected/>}
+                    {selectedMeme.public ? <Public /> : <Protected />}
                 </span>
                 {user ? <Button variant="secondary" onClick={closeModal}>Copy</Button> : <></>}
                 {user === selectedMeme.creator ? <Button variant="secondary" onClick={closeModal}>Delete</Button> : <></>}
@@ -59,8 +59,11 @@ const ModalHome = (props) => {
 
 const handleSubmit = (event) => { }
 
+// Modal create component
 const ModalCreate = (props) => {
     const { show, selectedTemplate, closeModal, user } = props;
+    const [textColor, setTextColor] = useState({ displayColorPicker: false, color: { r: '0', g: '0', b: '0', a: '1' } });
+
     const selectedMeme = { title: "", image: selectedTemplate, sentence1: "", sentence2: "", sentence3: "", creator: user };
 
     return (
@@ -74,9 +77,23 @@ const ModalCreate = (props) => {
                     <Col className="border-left border-secondary">
                         <Form onSubmit={handleSubmit} >
                             <Modal.Body>
-                                <br />
                                 <Form.Control type="text" placeholder="Title" />
                                 <br />
+                                <Row >
+                                    <Col sm="1" className="d-flex align-items-center">
+                                        Font:
+                                    </Col>
+                                    <Col sm="7">
+                                        <Form.Control as="select">
+                                            <option>Arial</option>
+                                            <option>Calibri</option>
+                                            <option>Roboto</option>
+                                        </Form.Control>
+                                    </Col>
+                                    <Col sm="1" className="d-flex align-items-center offset-2">
+                                        <ColorPicker textColor={textColor} setTextColor={setTextColor}/>
+                                    </Col>
+                                </Row>
                                 <br />
                                 <Form.Group controlId="sentence1">
                                     <Form.Control as="textarea" placeholder="Sentence 1" rows={3} className="resize-none" />
@@ -99,7 +116,7 @@ const ModalCreate = (props) => {
                     </Col>
                 </Row>
             </Modal.Body>
-        </Modal>
+        </Modal >
     );
 }
 
