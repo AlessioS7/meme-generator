@@ -140,6 +140,7 @@ const Main = () => {
         <Route path="/createMeme">
           <Row className="vh-100 below-nav">
             <TemplatesList/>
+            <Modals.ModalCreate show={true} selectedTemplate={"spongebobRainbow.jpg"} closeModal={closeModal} user={user}/>
           </Row>
         </Route>
       </Switch>
