@@ -71,7 +71,7 @@ const ModalCreate = (props) => {
             < Modal.Header closeButton >
                 <Modal.Title>Create your meme</Modal.Title>
             </Modal.Header >
-            <Modal.Body style={{ height: '80vh' }}>
+            <Modal.Body style={{ height: '82vh' }}>
                 <Row className="h-100">
                     <Col className="templateCreate"><MemeWrapper meme={selectedMeme} style={{ height: '100%', width: '100%' }} /></Col>
                     <Col className="border-left border-secondary">
