@@ -68,16 +68,17 @@ const Main = () => {
       } catch (err) {
         console.log("No logged user"); // mostly unauthenticated user
       }
+      changeRoute(window.location.pathname.substring(1));
     };
     checkAuth();
   }, []);
 
   //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-  const getMemeById = id => memesList.filter(m => m.id === id)[0]; 
+  const getMemeById = id => memesList.filter(m => m.id === id)[0];
 
   //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-  
+
   useEffect(() => {
     if (dirty) {
       API.getMemes()
@@ -96,8 +97,8 @@ const Main = () => {
       const user = await API.logIn(credentials);
       setUser(user);
       setLoggedIn(true);
-      setRoute("");
       setDirty(true);
+      changeRoute("");
     }
     catch (err) {
       // error is handled and visualized in the login form, do not manage error, throw it
@@ -111,6 +112,7 @@ const Main = () => {
   const handleLogOut = async () => {
     await API.logOut()
     // clean up everything
+    changeRoute("");
     setLoggedIn(false);
     setUser(null);
     setDirty(true);
@@ -133,11 +135,11 @@ const Main = () => {
           <Row className="vh-100 below-nav">
             <MemesList list={memesList} setSelectedMeme={setSelectedMeme} showModal={showModal} />
           </Row>
-          {selectedMeme && <Modals.ModalHome show={show} selectedMeme={getMemeById(selectedMeme)} closeModal={closeModal} user={user}/>}
+          {selectedMeme && <Modals.ModalHome show={show} selectedMeme={getMemeById(selectedMeme)} closeModal={closeModal} user={user} />}
         </Route>
         <Route path="/createMeme">
           <Row className="vh-100 below-nav">
-            {!loggedIn ? <Redirect to="/" /> : <TemplatesList></TemplatesList>}
+            <TemplatesList/>
           </Row>
         </Route>
       </Switch>

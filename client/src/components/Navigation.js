@@ -4,7 +4,7 @@ import { LogoutButton } from './Login';
 
 const Navigation = (props) => {
     const { onLogOut, changeRoute, route, loggedIn, user } = props;
-
+    //changeRoute("createMeme")
     return (
         <Navbar bg="dark" variant="dark" fixed="top" expand="lg" className="justify-content-between">
             <Navbar.Brand onClick={() => changeRoute("")} className="clickable">
@@ -14,7 +14,7 @@ const Navigation = (props) => {
             {route === "login" ? <></> : loggedIn ?
                 <div>
                     <Navbar.Text className="mr-3">Welcome, {user}!</Navbar.Text>
-                    {window.location.pathname.endsWith("/") ?
+                    {/* window.location.pathname.endsWith("/") */ route === "" ?
                         <Button variant="secondary" className="mr-2" onClick={() => changeRoute("createMeme")}>Create a meme</Button> : <></>}
                     <LogoutButton logout={onLogOut} />
                 </div> :
