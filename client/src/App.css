@@ -84,3 +84,19 @@
   max-height: 47%;
   max-width: 42%;
 }
+
+.templateCreate {
+  display: block;
+  margin-top: auto;
+  margin-bottom: auto; 
+}
+
+.resize-none {
+	resize: none;
+}
+
+.rel-left {
+  position: absolute;
+  left: 3%;
+  font-size: large;
+}

@@ -13,20 +13,22 @@ console.log(images);
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 const MemeWrapper = (props) => {
-    return Drake(props);
+    return Drake(props); //map[props.meme.image].component(props);
 }
 
+/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
 const Drake = (props) => {
-    const { meme, style } = props;
+    const { meme, style, className } = props;
     return (
         <>
-            <img src={images[props.meme.image].default} style={style}/>
+            <img src={images[props.meme.image].default} style={style} className={className}/>
             <p className="center" style={{
                 top: '2%',
-            }}>HELLO From the other adfaj ifaodj ai daifj kdsaljf jaskflj klajf lakjfdlka j idhfodah</p>
+            }}>HELLO From the adfaj ifaodj ai daifj kdsaljf jaskflj klajf lakjfdlka j idhfodah</p>
             <p className="center" style={{
                 top: '51%',
-            }}>HELLO From the other adfaj ifaodj aiah</p>
+            }}>HELLO From the other addadsad da afaj ifaodj aiah</p>
         </>
     );
 }
