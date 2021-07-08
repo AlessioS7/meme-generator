@@ -8,7 +8,7 @@ import API from './API'
 import { LoginForm } from './components/Login';
 import MemesList from './components/MemesList';
 import TemplatesList from './components/CreateMeme';
-import ModalHome from './components/ModalHome';
+import Modals from './components/Modals';
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
@@ -77,7 +77,7 @@ const Main = () => {
   const getMemeById = id => memesList.filter(m => m.id === id)[0]; 
 
   //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-
+  
   useEffect(() => {
     if (dirty) {
       API.getMemes()
@@ -118,9 +118,6 @@ const Main = () => {
 
   //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-  console.log(selectedMeme);
-  console.log(getMemeById(selectedMeme));
-
   return (
     <Container fluid>
       <Row>
@@ -136,7 +133,7 @@ const Main = () => {
           <Row className="vh-100 below-nav">
             <MemesList list={memesList} setSelectedMeme={setSelectedMeme} showModal={showModal} />
           </Row>
-          {selectedMeme && <ModalHome show={show} selectedMeme={getMemeById(selectedMeme)} closeModal={closeModal} />}
+          {selectedMeme && <Modals.ModalHome show={show} selectedMeme={getMemeById(selectedMeme)} closeModal={closeModal} user={user}/>}
         </Route>
         <Route path="/createMeme">
           <Row className="vh-100 below-nav">

@@ -39,8 +39,9 @@ async function logOut() {
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 async function getUserInfo() {
-    const response = await fetch('/sessions/current');
+    const response = await fetch('/api/sessions/current');
     const userInfo = await response.json();
+    console.log(response);
     if (response.ok) {
         return userInfo;
     } else {
@@ -68,5 +69,5 @@ async function getMemes() {
     }
 }
 
-const API = { logIn, logOut, getMemes }
+const API = { logIn, logOut, getMemes, getUserInfo }
 export default API;

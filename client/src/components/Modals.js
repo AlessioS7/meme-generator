@@ -12,7 +12,7 @@ const images = importAll(require.context('./images', false, /\.(png|jpe?g|svg)$/
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 const ModalHome = (props) => {
-    const { show, selectedMeme, closeModal } = props;
+    const { show, selectedMeme, closeModal, user } = props;
 
     return (
         <Modal show={show} onHide={closeModal}>
@@ -21,18 +21,17 @@ const ModalHome = (props) => {
             </Modal.Header >
             <Modal.Body><MemeWrapper meme={selectedMeme} style={{ height: '100%', width: '100%' }} /></Modal.Body>
             <Modal.Footer>
-                <Button variant="secondary" onClick={closeModal}>
-                    Close
-                </Button>
-                <Button variant="secondary" onClick={closeModal}>
-                    Delete
-                </Button>
-                <Button variant="secondary" onClick={closeModal}>
-                    Copy
-                </Button>
+                {user ? <Button variant="secondary" onClick={closeModal}>Copy</Button> : <></>}
+                {user === selectedMeme.creator ? <Button variant="secondary" onClick={closeModal}>Delete</Button> : <></>}
+                <Button variant="secondary" onClick={closeModal}>Close</Button>
             </Modal.Footer>
         </Modal>
     );
 }
 
-export default ModalHome;
+const ModalCreate = (props) => {
+
+}
+
+const Modals = { ModalHome, ModalCreate };
+export default Modals;
