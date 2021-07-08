@@ -83,6 +83,7 @@
   left: 52%;
   max-height: 47%;
   max-width: 42%;
+  min-width: 42%;
 }
 
 .templateCreate {

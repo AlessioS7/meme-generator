@@ -25,10 +25,10 @@ const Drake = (props) => {
             <img src={images[props.meme.image].default} style={style} className={className}/>
             <p className="center" style={{
                 top: '2%',
-            }}>HELLO From the adfaj ifaodj ai daifj kdsaljf jaskflj klajf lakjfdlka j idhfodah</p>
+            }}>{props.meme.sentence1}</p>
             <p className="center" style={{
                 top: '51%',
-            }}>HELLO From the other addadsad da afaj ifaodj aiah</p>
+            }}>{props.meme.sentence2}</p>
         </>
     );
 }
