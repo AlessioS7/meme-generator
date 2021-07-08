@@ -106,7 +106,7 @@ const ModalCreate = (props) => {
                                 </Form.Group>
                                 <br />
                                 <Form.Group controlId="checkbox">
-                                    <Form.Check type="checkbox" label="Public" />
+                                    <Form.Check className="d-flex align-items-center"  type="checkbox" label="Public" />
                                 </Form.Group>
                             </Modal.Body>
                             <Modal.Footer>
