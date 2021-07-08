@@ -1,4 +1,5 @@
 import { Modal, Button } from 'react-bootstrap';
+import MemeWrapper from './Memes';
 
 function importAll(r) {
     let images = {};
@@ -7,31 +8,30 @@ function importAll(r) {
 }
 
 const images = importAll(require.context('./images', false, /\.(png|jpe?g|svg)$/));
-console.log(images);
+
+/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 const ModalHome = (props) => {
+    const { show, selectedMeme, closeModal } = props;
 
     return (
-        <Modal.Dialog>
-            <Modal.Header closeButton>
-                <Modal.Title>Modal title</Modal.Title>
-            </Modal.Header>
-
-            <Modal.Body>
-                <img src={images["ifTheyCouldRead.png"].default} style={{ height: '100%', width: '100%'  }} />
-                <p className="center" style={{
-                    top: '2%',
-                }}>HELLO From the other adfaj ifaodj ai daifj kdsaljf jaskflj klajf lakjfdlka j idhfodah</p>
-                <p className="center" style={{
-                    top: '51%',
-                }}>HELLO From the other adfaj ifaodj aiah</p>
-            </Modal.Body>
-
+        <Modal show={show} onHide={closeModal}>
+            < Modal.Header closeButton >
+                <Modal.Title>{selectedMeme.title}</Modal.Title>
+            </Modal.Header >
+            <Modal.Body><MemeWrapper meme={selectedMeme} style={{ height: '100%', width: '100%' }} /></Modal.Body>
             <Modal.Footer>
-                <Button variant="secondary">Close</Button>
-                <Button variant="primary">Save changes</Button>
+                <Button variant="secondary" onClick={closeModal}>
+                    Close
+                </Button>
+                <Button variant="secondary" onClick={closeModal}>
+                    Delete
+                </Button>
+                <Button variant="secondary" onClick={closeModal}>
+                    Copy
+                </Button>
             </Modal.Footer>
-        </Modal.Dialog>
+        </Modal>
     );
 }
 

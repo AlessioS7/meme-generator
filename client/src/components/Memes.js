@@ -17,16 +17,17 @@ const MemeWrapper = (props) => {
 }
 
 const Drake = (props) => {
+    const { meme, style } = props;
     return (
-        <Col className="previewMeme clickable">
-            <img src={images[props.meme.image].default} style={{height: '350px'}}/>
+        <>
+            <img src={images[props.meme.image].default} style={style}/>
             <p className="center" style={{
                 top: '2%',
             }}>HELLO From the other adfaj ifaodj ai daifj kdsaljf jaskflj klajf lakjfdlka j idhfodah</p>
             <p className="center" style={{
                 top: '51%',
             }}>HELLO From the other adfaj ifaodj aiah</p>
-        </Col>
+        </>
     );
 }
 

@@ -8,6 +8,7 @@ import API from './API'
 import { LoginForm } from './components/Login';
 import MemesList from './components/MemesList';
 import TemplatesList from './components/CreateMeme';
+import ModalHome from './components/ModalHome';
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
@@ -28,8 +29,15 @@ const Main = () => {
   const [memesList, setMemesList] = useState([]);
   const [dirty, setDirty] = useState(true);
   const [message, setMessage] = useState('');
+  const [show, setShow] = useState(false);
+  const [selectedMeme, setSelectedMeme] = useState(null);
 
   const history = useHistory();
+
+  //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+  const closeModal = () => setShow(false);
+  const showModal = () => setShow(true);
 
   //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
@@ -63,6 +71,10 @@ const Main = () => {
     };
     checkAuth();
   }, []);
+
+  //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+  const getMemeById = id => memesList.filter(m => m.id === id)[0]; 
 
   //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
@@ -106,6 +118,9 @@ const Main = () => {
 
   //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
+  console.log(selectedMeme);
+  console.log(getMemeById(selectedMeme));
+
   return (
     <Container fluid>
       <Row>
@@ -119,12 +134,13 @@ const Main = () => {
         </Route>
         <Route exact path="/">
           <Row className="vh-100 below-nav">
-            <MemesList list={memesList}></MemesList>
+            <MemesList list={memesList} setSelectedMeme={setSelectedMeme} showModal={showModal} />
           </Row>
+          {selectedMeme && <ModalHome show={show} selectedMeme={getMemeById(selectedMeme)} closeModal={closeModal} />}
         </Route>
         <Route path="/createMeme">
           <Row className="vh-100 below-nav">
-          {!loggedIn ? <Redirect to="/" /> : <TemplatesList></TemplatesList>}
+            {!loggedIn ? <Redirect to="/" /> : <TemplatesList></TemplatesList>}
           </Row>
         </Route>
       </Switch>
