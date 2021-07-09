@@ -35,7 +35,7 @@ const Protected = () => {
 }
 
 const ModalHome = (props) => {
-    const { show, selectedMeme, closeModal, user, changeRoute, deleteMeme} = props;
+    const { show, selectedMeme, closeModal, user, changeRoute, deleteMeme } = props;
 
     return (
         <Modal show={show} onHide={closeModal} centered size={selectedMeme && modalSize(selectedMeme.image) ? "lg" : "md"} >
@@ -94,7 +94,13 @@ const ModalCreate = (props) => {
 
         cm();
     }
-    
+
+    const mapImagesNumSentences = {
+        "drake.jpg": { "sentence2": false, "sentence3": true },
+        "spongebobRainbow.jpg": { "sentence2": false, "sentence3": true },
+        "ifTheyCouldRead.png": { "sentence2": true, "sentence3": true }
+    };
+
     return (
         <Modal show={show} onHide={closeModal} size="xl" centered>
             < Modal.Header closeButton >
@@ -131,15 +137,17 @@ const ModalCreate = (props) => {
                                 </Form.Group>
                                 <Form.Group controlId="sentence2" >
                                     <Form.Control as="textarea" placeholder="Sentence 2" rows={3} className="resize-none"
-                                        value={sentence2} onChange={(ev) => setSentence2(ev.target.value)} disabled={false} />
+                                        value={sentence2} onChange={(ev) => setSentence2(ev.target.value)}
+                                        disabled={mapImagesNumSentences[meme.image].sentence2} />
                                 </Form.Group>
                                 <Form.Group controlId="sentence3" >
                                     <Form.Control as="textarea" placeholder="Sentence 3" rows={3} className="resize-none"
-                                        value={sentence3} onChange={(ev) => setSentence3(ev.target.value)} disabled={false} />
+                                        value={sentence3} onChange={(ev) => setSentence3(ev.target.value)}
+                                        disabled={mapImagesNumSentences[meme.image].sentence3} />
                                 </Form.Group>
                                 <br />
                                 <Form.Group controlId="checkbox" >
-                                    {console.log("TEST: " + publ + ", user" + user + ", creator: " )}
+                                    {console.log("TEST: " + publ + ", user" + user + ", creator: ")}
                                     <Form.Check className="d-flex align-items-center" type="checkbox" label="Public"
                                         checked={publ} onChange={(ev) => setPubl(ev.target.checked)}
                                         disabled={selectedMeme && selectedMeme.public !== 1 && selectedMeme.creator !== user} />

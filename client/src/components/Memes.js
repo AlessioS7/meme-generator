@@ -12,7 +12,7 @@ const images = importAll(require.context('./images', false, /\.(png|jpe?g|svg)$/
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 const MemeWrapper = (props) => {
-    return Drake(props); //map[props.meme.image].component(props);
+    return mapImagesComponents[props.meme.image](props);
 }
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -21,7 +21,7 @@ const Drake = (props) => {
     const { meme, style, className } = props;
     return (
         <>
-            <img src={images[meme.image].default} style={style} className={className}/>
+            <img src={images[meme.image].default} style={style} className={className} />
             <p className="center" style={{
                 top: '2%',
                 fontFamily: `${meme.font}`,
@@ -35,5 +35,59 @@ const Drake = (props) => {
         </>
     );
 }
+
+/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+// TODO
+const SpongebobRainbow = (props) => {
+    const { meme, style, className } = props;
+
+    return (
+        <>
+            <img src={images[meme.image].default} style={style} className={className} />
+            <p className="center" style={{
+                top: '2%',
+                fontFamily: `${meme.font}`,
+                color: `rgba(${meme.fontColor.r}, ${meme.fontColor.g}, ${meme.fontColor.b}, ${meme.fontColor.a})`,
+            }}>{props.meme.sentence1}</p>
+            <p className="center" style={{
+                top: '51%',
+                fontFamily: `${meme.font}`,
+                color: `rgba(${meme.fontColor.r}, ${meme.fontColor.g}, ${meme.fontColor.b}, ${meme.fontColor.a})`,
+            }}>{props.meme.sentence2}</p>
+        </>
+    );
+}
+
+/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+// TODO
+const IfTheyCouldRead = (props) => {
+    const { meme, style, className } = props;
+
+    return (
+        <>
+            <img src={images[meme.image].default} style={style} className={className} />
+            <p className="center" style={{
+                top: '2%',
+                fontFamily: `${meme.font}`,
+                color: `rgba(${meme.fontColor.r}, ${meme.fontColor.g}, ${meme.fontColor.b}, ${meme.fontColor.a})`,
+            }}>{props.meme.sentence1}</p>
+            <p className="center" style={{
+                top: '51%',
+                fontFamily: `${meme.font}`,
+                color: `rgba(${meme.fontColor.r}, ${meme.fontColor.g}, ${meme.fontColor.b}, ${meme.fontColor.a})`,
+            }}>{props.meme.sentence2}</p>
+        </>
+    );
+}
+
+/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+const mapImagesComponents = {
+    "drake.jpg": Drake,
+    "spongebobRainbow.jpg": SpongebobRainbow,
+    "ifTheyCouldRead.png": IfTheyCouldRead
+};
 
 export default MemeWrapper;
