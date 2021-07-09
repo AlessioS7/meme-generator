@@ -35,20 +35,20 @@ const Protected = () => {
 }
 
 const ModalHome = (props) => {
-    const { show, selectedMeme, closeModal, user } = props;
+    const { show, selectedMeme, closeModal, user, changeRoute, deleteMeme} = props;
 
     return (
-        <Modal show={show} onHide={closeModal} centered size={modalSize(selectedMeme.image) ? "lg" : "md"} >
+        <Modal show={show} onHide={closeModal} centered size={selectedMeme && modalSize(selectedMeme.image) ? "lg" : "md"} >
             < Modal.Header closeButton >
-                <Modal.Title>{selectedMeme.title}</Modal.Title>
+                <Modal.Title>{selectedMeme ? selectedMeme.title : ""}</Modal.Title>
             </Modal.Header >
             <Modal.Body><MemeWrapper meme={selectedMeme} style={{ height: '100%', width: '100%' }} /></Modal.Body>
             <Modal.Footer>
-                <span className="rel-left">Author: {selectedMeme.creator} <span class="tab-space">&nbsp;</span>
-                    {selectedMeme.public ? <Public /> : <Protected />}
+                <span className="rel-left">Author: {selectedMeme ? selectedMeme.creator : ""} <span class="tab-space">&nbsp;</span>
+                    {selectedMeme && selectedMeme.public ? <Public /> : <Protected />}
                 </span>
-                {user ? <Button variant="secondary" onClick={closeModal}>Copy</Button> : <></>}
-                {user === selectedMeme.creator ? <Button variant="secondary" onClick={closeModal}>Delete</Button> : <></>}
+                {user ? <Button variant="secondary" onClick={() => changeRoute("createMeme")}>Copy</Button> : <></>}
+                {selectedMeme && user === selectedMeme.creator ? <Button variant="secondary" onClick={() => deleteMeme(selectedMeme.id)}>Delete</Button> : <></>}
                 <Button variant="secondary" onClick={closeModal}>Close</Button>
             </Modal.Footer>
         </Modal>
@@ -59,17 +59,19 @@ const ModalHome = (props) => {
 
 // Modal create component
 const ModalCreate = (props) => {
-    const { show, selectedTemplate, cm, user, addMeme } = props;
-    const [title, setTitle] = useState("");
-    const [font, setFont] = useState("Arial");
-    const [textColor, setTextColor] = useState({ displayColorPicker: false, color: { r: '0', g: '0', b: '0', a: '1' } });
-    const [sentence1, setSentence1] = useState("");
-    const [sentence2, setSentence2] = useState("");
-    const [sentence3, setSentence3] = useState("");
-    const [publ, setPubl] = useState(false);
-
-    const selectedMeme = {
-        title: title, image: selectedTemplate, font: font, fontColor: textColor.color,
+    const { show, selectedTemplate, cm, user, addMeme, selectedMeme } = props;
+    const [title, setTitle] = useState(selectedMeme ? selectedMeme.title : "");
+    const [font, setFont] = useState(selectedMeme ? selectedMeme.font : "Arial");
+    const color = selectedMeme ? selectedMeme.fontColor : { r: '0', g: '0', b: '0', a: '1' };
+    const [textColor, setTextColor] = useState({ displayColorPicker: false, color: color });
+    const [sentence1, setSentence1] = useState(selectedMeme ? selectedMeme.sentence1 : "");
+    const [sentence2, setSentence2] = useState(selectedMeme ? selectedMeme.sentence2 : "");
+    const [sentence3, setSentence3] = useState(selectedMeme ? selectedMeme.sentence3 : "");
+    const [publ, setPubl] = useState(selectedMeme ? selectedMeme.public : false);
+    console.log(selectedMeme);
+    const template = selectedMeme ? selectedMeme.image : selectedTemplate;
+    const meme = {
+        title: title, image: template, font: font, fontColor: textColor.color,
         sentence1: sentence1, sentence2: sentence2, sentence3: sentence3, public: publ, creator: user
     };
 
@@ -77,8 +79,8 @@ const ModalCreate = (props) => {
         // stop event default and propagation
         event.preventDefault();
         event.stopPropagation();
-        console.log(selectedMeme);
-        addMeme(selectedMeme);
+        console.log(meme);
+        addMeme(meme);
     }
 
     const closeModal = () => {
@@ -92,7 +94,7 @@ const ModalCreate = (props) => {
 
         cm();
     }
-
+    
     return (
         <Modal show={show} onHide={closeModal} size="xl" centered>
             < Modal.Header closeButton >
@@ -100,7 +102,7 @@ const ModalCreate = (props) => {
             </Modal.Header >
             <Modal.Body style={{ height: '82vh' }}>
                 <Row className="h-100">
-                    <Col className="templateCreate"><MemeWrapper meme={selectedMeme} style={{ height: '100%', width: '100%' }} className="" /></Col>
+                    <Col className="templateCreate"><MemeWrapper meme={meme} style={{ height: '100%', width: '100%' }} className="" /></Col>
                     <Col className="border-left border-secondary">
                         <Form onSubmit={handleSubmit} >
                             <Modal.Body>
@@ -123,18 +125,24 @@ const ModalCreate = (props) => {
                                     </Col>
                                 </Row>
                                 <br />
-                                <Form.Group controlId="sentence1" value={sentence1} onChange={(ev) => setSentence1(ev.target.value)}>
-                                    <Form.Control as="textarea" placeholder="Sentence 1" rows={3} className="resize-none" required autoFocus />
+                                <Form.Group controlId="sentence1" >
+                                    <Form.Control as="textarea" placeholder="Sentence 1" rows={3} className="resize-none"
+                                        value={sentence1} onChange={(ev) => setSentence1(ev.target.value)} required autoFocus />
                                 </Form.Group>
-                                <Form.Group controlId="sentence2" value={sentence2} onChange={(ev) => setSentence2(ev.target.value)}>
-                                    <Form.Control as="textarea" placeholder="Sentence 2" rows={3} className="resize-none" disabled={false} />
+                                <Form.Group controlId="sentence2" >
+                                    <Form.Control as="textarea" placeholder="Sentence 2" rows={3} className="resize-none"
+                                        value={sentence2} onChange={(ev) => setSentence2(ev.target.value)} disabled={false} />
                                 </Form.Group>
-                                <Form.Group controlId="sentence3" value={sentence3} onChange={(ev) => setSentence3(ev.target.value)}>
-                                    <Form.Control as="textarea" placeholder="Sentence 3" rows={3} className="resize-none" disabled={false} />
+                                <Form.Group controlId="sentence3" >
+                                    <Form.Control as="textarea" placeholder="Sentence 3" rows={3} className="resize-none"
+                                        value={sentence3} onChange={(ev) => setSentence3(ev.target.value)} disabled={false} />
                                 </Form.Group>
                                 <br />
-                                <Form.Group controlId="checkbox" value={publ} onChange={(ev) => setPubl(ev.target.value)}>
-                                    <Form.Check className="d-flex align-items-center" type="checkbox" label="Public" />
+                                <Form.Group controlId="checkbox" >
+                                    {console.log("TEST: " + publ + ", user" + user + ", creator: " )}
+                                    <Form.Check className="d-flex align-items-center" type="checkbox" label="Public"
+                                        checked={publ} onChange={(ev) => setPubl(ev.target.checked)}
+                                        disabled={selectedMeme && selectedMeme.public !== 1 && selectedMeme.creator !== user} />
                                 </Form.Group>
                             </Modal.Body>
                             <Modal.Footer>

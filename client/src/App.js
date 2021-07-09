@@ -37,7 +37,7 @@ const Main = () => {
 
   //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-  const closeModal = () => setShow(false);
+  const closeModal = () => {setShow(false); setSelectedMeme(null);};
   const showModal = () => setShow(true);
 
   //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -87,6 +87,16 @@ const Main = () => {
     
     setShow(false);
     changeRoute("");
+  }
+
+  //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+  const deleteMeme = (meme) => {
+    API.deleteMeme(meme)
+    .then(() => setDirty(true))
+    .catch(e => handleErrors(e));
+    
+    setShow(false);
   }
 
   //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -146,13 +156,13 @@ const Main = () => {
         <Route exact path="/">
           <Row className="vh-100 below-nav">
             <MemesList list={memesList} setSelectedMeme={setSelectedMeme} showModal={showModal} />
+          {selectedMeme && <Modals.ModalHome show={show} selectedMeme={getMemeById(selectedMeme)} closeModal={closeModal} user={user} changeRoute={changeRoute} deleteMeme={deleteMeme}/>}
           </Row>
-          {selectedMeme && <Modals.ModalHome show={show} selectedMeme={getMemeById(selectedMeme)} closeModal={closeModal} user={user} />}
         </Route>
         <Route path="/createMeme">
           <Row className="vh-100 below-nav">
             <TemplatesList setSelectedTemplate={setSelectedTemplate} showModal={showModal}/>
-            <Modals.ModalCreate show={show} selectedTemplate={selectedTemplate} cm={closeModal} user={user} addMeme={addMeme}/>
+            <Modals.ModalCreate show={show} selectedTemplate={selectedTemplate} cm={closeModal} user={user} addMeme={addMeme} selectedMeme={getMemeById(selectedMeme)}/>
           </Row>
         </Route>
       </Switch>

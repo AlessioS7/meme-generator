@@ -102,5 +102,27 @@ async function addMeme(meme) {
     }
 }
 
-const API = { logIn, logOut, getMemes, getUserInfo, addMeme }
+/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+async function deleteMeme(id) {
+    const response = await fetch('/api/memes/' + id, {
+        method: 'DELETE',
+    });
+
+    if (response.ok) {
+        return null;
+    }
+    else {
+        // ERROR HANDLING
+        try {
+            const errDetail = await response.json();
+            throw errDetail.error;
+        }
+        catch (err) {
+            throw err;
+        }
+    }
+}
+
+const API = { logIn, logOut, getMemes, getUserInfo, addMeme, deleteMeme }
 export default API;
