@@ -95,7 +95,6 @@ app.get('/api/memes',
   async (req, res) => {
     try {
       const result = await memeDao.listMemes(req.isAuthenticated());
-
       if (result.error)
         res.status(404).json(result);
       else
@@ -113,7 +112,6 @@ app.post('/api/memes',
   [
     check('title').isLength({ min: 1, max: 160 }),
     check('image').isLength({ min: 1, max: 20 }),
-    check('public').isBoolean(),
     check('creator').isLength({ min: 1, max: 20 })
     // that at least a sentence is given is checked directly in the front end
   ],
@@ -130,7 +128,9 @@ app.post('/api/memes',
       sentence2: req.body.sentence2,
       sentence3: req.body.sentence3,
       public: req.body.public,
-      creator: req.body.creator
+      creator: req.body.creator,
+      font: req.body.font,
+      fontColor: req.body.fontColor
     };
 
     try {

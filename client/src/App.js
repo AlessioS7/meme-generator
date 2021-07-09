@@ -31,6 +31,7 @@ const Main = () => {
   const [message, setMessage] = useState('');
   const [show, setShow] = useState(false);
   const [selectedMeme, setSelectedMeme] = useState(null);
+  const [selectedTemplate, setSelectedTemplate] = useState(null);
 
   const history = useHistory();
 
@@ -76,6 +77,17 @@ const Main = () => {
   //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
   const getMemeById = id => memesList.filter(m => m.id === id)[0];
+
+  //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+  const addMeme = (meme) => {
+    API.addMeme(meme)
+    .then(() => setDirty(true))
+    .catch(e => handleErrors(e));
+    
+    setShow(false);
+    changeRoute("");
+  }
 
   //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
@@ -139,8 +151,8 @@ const Main = () => {
         </Route>
         <Route path="/createMeme">
           <Row className="vh-100 below-nav">
-            <TemplatesList/>
-            <Modals.ModalCreate show={true} selectedTemplate={"drake.jpg"} closeModal={closeModal} user={user}/>
+            <TemplatesList setSelectedTemplate={setSelectedTemplate} showModal={showModal}/>
+            <Modals.ModalCreate show={show} selectedTemplate={selectedTemplate} cm={closeModal} user={user} addMeme={addMeme}/>
           </Row>
         </Route>
       </Switch>

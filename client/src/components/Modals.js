@@ -57,14 +57,41 @@ const ModalHome = (props) => {
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-const handleSubmit = (event) => { }
-
 // Modal create component
 const ModalCreate = (props) => {
-    const { show, selectedTemplate, closeModal, user } = props;
+    const { show, selectedTemplate, cm, user, addMeme } = props;
+    const [title, setTitle] = useState("");
+    const [font, setFont] = useState("Arial");
     const [textColor, setTextColor] = useState({ displayColorPicker: false, color: { r: '0', g: '0', b: '0', a: '1' } });
+    const [sentence1, setSentence1] = useState("");
+    const [sentence2, setSentence2] = useState("");
+    const [sentence3, setSentence3] = useState("");
+    const [publ, setPubl] = useState(false);
 
-    const selectedMeme = { title: "", image: selectedTemplate, sentence1: "", sentence2: "", sentence3: "", creator: user };
+    const selectedMeme = {
+        title: title, image: selectedTemplate, font: font, fontColor: textColor.color,
+        sentence1: sentence1, sentence2: sentence2, sentence3: sentence3, public: publ, creator: user
+    };
+
+    const handleSubmit = (event) => {
+        // stop event default and propagation
+        event.preventDefault();
+        event.stopPropagation();
+        console.log(selectedMeme);
+        addMeme(selectedMeme);
+    }
+
+    const closeModal = () => {
+        setTitle("");
+        setFont("Arial")
+        setTextColor({ displayColorPicker: false, color: { r: '0', g: '0', b: '0', a: '1' } });
+        setSentence1("");
+        setSentence2("");
+        setSentence3("");
+        setPubl(false);
+
+        cm();
+    }
 
     return (
         <Modal show={show} onHide={closeModal} size="xl" centered>
@@ -73,40 +100,41 @@ const ModalCreate = (props) => {
             </Modal.Header >
             <Modal.Body style={{ height: '82vh' }}>
                 <Row className="h-100">
-                    <Col className="templateCreate"><MemeWrapper meme={selectedMeme} style={{ height: '100%', width: '100%' }} /></Col>
+                    <Col className="templateCreate"><MemeWrapper meme={selectedMeme} style={{ height: '100%', width: '100%' }} className="" /></Col>
                     <Col className="border-left border-secondary">
                         <Form onSubmit={handleSubmit} >
                             <Modal.Body>
-                                <Form.Control type="text" placeholder="Title" />
+                                <Form.Control type="text" placeholder="Title" value={title}
+                                    onChange={(ev) => setTitle(ev.target.value)} required autoFocus />
                                 <br />
                                 <Row >
                                     <Col sm="1" className="d-flex align-items-center">
                                         Font:
                                     </Col>
                                     <Col sm="7">
-                                        <Form.Control as="select">
+                                        <Form.Control as="select" value={font} onChange={(ev) => setFont(ev.target.value)}>
                                             <option>Arial</option>
                                             <option>Calibri</option>
                                             <option>Roboto</option>
                                         </Form.Control>
                                     </Col>
                                     <Col sm="1" className="d-flex align-items-center offset-2">
-                                        <ColorPicker textColor={textColor} setTextColor={setTextColor}/>
+                                        <ColorPicker textColor={textColor} setTextColor={setTextColor} />
                                     </Col>
                                 </Row>
                                 <br />
-                                <Form.Group controlId="sentence1">
-                                    <Form.Control as="textarea" placeholder="Sentence 1" rows={3} className="resize-none" />
+                                <Form.Group controlId="sentence1" value={sentence1} onChange={(ev) => setSentence1(ev.target.value)}>
+                                    <Form.Control as="textarea" placeholder="Sentence 1" rows={3} className="resize-none" required autoFocus />
                                 </Form.Group>
-                                <Form.Group controlId="sentence2">
-                                    <Form.Control as="textarea" placeholder="Sentence 2" rows={3} className="resize-none" readOnly={false} />
+                                <Form.Group controlId="sentence2" value={sentence2} onChange={(ev) => setSentence2(ev.target.value)}>
+                                    <Form.Control as="textarea" placeholder="Sentence 2" rows={3} className="resize-none" disabled={false} />
                                 </Form.Group>
-                                <Form.Group controlId="sentence3">
-                                    <Form.Control as="textarea" placeholder="Sentence 3" rows={3} className="resize-none" readOnly={false} />
+                                <Form.Group controlId="sentence3" value={sentence3} onChange={(ev) => setSentence3(ev.target.value)}>
+                                    <Form.Control as="textarea" placeholder="Sentence 3" rows={3} className="resize-none" disabled={false} />
                                 </Form.Group>
                                 <br />
-                                <Form.Group controlId="checkbox">
-                                    <Form.Check className="d-flex align-items-center"  type="checkbox" label="Public" />
+                                <Form.Group controlId="checkbox" value={publ} onChange={(ev) => setPubl(ev.target.value)}>
+                                    <Form.Check className="d-flex align-items-center" type="checkbox" label="Public" />
                                 </Form.Group>
                             </Modal.Body>
                             <Modal.Footer>

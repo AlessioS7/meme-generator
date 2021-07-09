@@ -12,17 +12,16 @@ const images = importAll(require.context('./images', false, /\.(png|jpe?g|svg)$/
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 const TemplatesList = (props) => {
-    const list = Object.entries(images).map(elem => elem[1].default);
-    console.log(list);
+    const {setSelectedTemplate, showModal} = props;
 
     return (
         <Container>
             <h2 className="mb-4">Select a template image:</h2>
             <Row xs={3} md={4}>
-                {list.map(template => {
+                {Object.entries(images).map(elem => {
                     return (
-                        <Col className="previewMeme clickable">
-                            <img src={template} style={{height: '255px'}}/>
+                        <Col className="previewMeme clickable" onClick={() => {setSelectedTemplate(elem[0]); showModal()}}>
+                            <img src={elem[1].default} style={{height: '255px'}}/>
                         </Col>
                     );
                 })}

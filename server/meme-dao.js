@@ -27,8 +27,8 @@ exports.listMemes = (isAuthenticated) => {
 // the meme id is added automatically by the DB
 exports.createMeme = (meme) => {
     return new Promise((resolve, reject) => {
-        const sql = 'INSERT INTO memes (title, image, sentence1, sentence2, sentence3, public, creator) VALUES(?, ?, ?, ?, ?, ?, ?)';
-        db.run(sql, [meme.title, meme.image, meme.sentence1, meme.sentence2, meme.sentence3, meme.public === "true" ? 1 : 0, meme.creator], function (err) {
+        const sql = 'INSERT INTO memes (title, image, sentence1, sentence2, sentence3, public, creator, font, fontColor) VALUES(?, ?, ?, ?, ?, ?, ?, ?, ?)';
+        db.run(sql, [meme.title, meme.image, meme.sentence1, meme.sentence2, meme.sentence3, meme.public === "on" ? 1 : 0, meme.creator, meme.font, meme.fontColor], function (err) {
             if (err) {
                 reject(err);
                 return;
