@@ -68,7 +68,7 @@ const ModalCreate = (props) => {
     const [sentence2, setSentence2] = useState(selectedMeme ? selectedMeme.sentence2 : "");
     const [sentence3, setSentence3] = useState(selectedMeme ? selectedMeme.sentence3 : "");
     const [publ, setPubl] = useState(selectedMeme ? selectedMeme.public : false);
-    console.log(selectedMeme);
+
     const template = selectedMeme ? selectedMeme.image : selectedTemplate;
     const meme = {
         title: title, image: template, font: font, fontColor: textColor.color,
@@ -93,12 +93,12 @@ const ModalCreate = (props) => {
         setPubl(false);
 
         cm();
-    }
+    } 
 
     const mapImagesNumSentences = {
-        "drake.jpg": { "sentence2": false, "sentence3": true },
-        "spongebobRainbow.jpg": { "sentence2": false, "sentence3": true },
-        "ifTheyCouldRead.png": { "sentence2": true, "sentence3": true }
+        "drake.jpg": { "sentence2": false, "sentence3": true, "ml": 150 },
+        "spongebobRainbow.jpg": { "sentence2": false, "sentence3": true, "ml": 22 },
+        "ifTheyCouldRead.png": { "sentence2": true, "sentence3": true, "ml": 60 }
     };
 
     return (
@@ -108,7 +108,7 @@ const ModalCreate = (props) => {
             </Modal.Header >
             <Modal.Body style={{ height: '82vh' }}>
                 <Row className="h-100">
-                    <Col className="templateCreate"><MemeWrapper meme={meme} style={{ height: '100%', width: '100%' }} className="" /></Col>
+                    <Col className="templateCreate"><MemeWrapper meme={meme} style={{ height: '99%', width: '99%' }} /></Col>
                     <Col className="border-left border-secondary">
                         <Form onSubmit={handleSubmit} >
                             <Modal.Body>
@@ -133,19 +133,24 @@ const ModalCreate = (props) => {
                                 <br />
                                 <Form.Group controlId="sentence1" >
                                     <Form.Control as="textarea" placeholder="Sentence 1" rows={3} className="resize-none"
-                                        value={sentence1} onChange={(ev) => setSentence1(ev.target.value)} required autoFocus />
+                                        value={sentence1} onChange={(ev) => setSentence1(ev.target.value)} required autoFocus
+                                        maxLength={mapImagesNumSentences[meme.image] && mapImagesNumSentences[meme.image].ml} />
                                 </Form.Group>
                                 <Form.Group controlId="sentence2" >
                                     <Form.Control as="textarea" placeholder="Sentence 2" rows={3} className="resize-none"
                                         value={sentence2} onChange={(ev) => setSentence2(ev.target.value)}
-                                        disabled={mapImagesNumSentences[meme.image].sentence2} />
+                                        disabled={mapImagesNumSentences[meme.image] && mapImagesNumSentences[meme.image].sentence2}
+                                        maxLength={mapImagesNumSentences[meme.image] && mapImagesNumSentences[meme.image].ml} />
                                 </Form.Group>
                                 <Form.Group controlId="sentence3" >
                                     <Form.Control as="textarea" placeholder="Sentence 3" rows={3} className="resize-none"
                                         value={sentence3} onChange={(ev) => setSentence3(ev.target.value)}
-                                        disabled={mapImagesNumSentences[meme.image].sentence3} />
+                                        disabled={mapImagesNumSentences[meme.image] && mapImagesNumSentences[meme.image].sentence3}
+                                        maxLength={mapImagesNumSentences[meme.image] && mapImagesNumSentences[meme.image].ml} />
+                                    <Form.Text muted className="text-center text-md-right">
+                                        Max number of characters per sentence: {mapImagesNumSentences[meme.image] && mapImagesNumSentences[meme.image].ml}
+                                    </Form.Text>
                                 </Form.Group>
-                                <br />
                                 <Form.Group controlId="checkbox" >
                                     {console.log("TEST: " + publ + ", user" + user + ", creator: ")}
                                     <Form.Check className="d-flex align-items-center" type="checkbox" label="Public"

@@ -22,12 +22,12 @@ const Drake = (props) => {
     return (
         <>
             <img src={images[meme.image].default} style={style} className={className} />
-            <p className="center" style={{
+            <p className="center-drake" style={{
                 top: '2%',
                 fontFamily: `${meme.font}`,
                 color: `rgba(${meme.fontColor.r}, ${meme.fontColor.g}, ${meme.fontColor.b}, ${meme.fontColor.a})`,
             }}>{props.meme.sentence1}</p>
-            <p className="center" style={{
+            <p className="center-drake" style={{
                 top: '51%',
                 fontFamily: `${meme.font}`,
                 color: `rgba(${meme.fontColor.r}, ${meme.fontColor.g}, ${meme.fontColor.b}, ${meme.fontColor.a})`,
@@ -45,13 +45,13 @@ const SpongebobRainbow = (props) => {
     return (
         <>
             <img src={images[meme.image].default} style={style} className={className} />
-            <p className="center" style={{
-                top: '2%',
+            <p className="center-sr" style={{
+                top: '1%',
                 fontFamily: `${meme.font}`,
                 color: `rgba(${meme.fontColor.r}, ${meme.fontColor.g}, ${meme.fontColor.b}, ${meme.fontColor.a})`,
             }}>{props.meme.sentence1}</p>
-            <p className="center" style={{
-                top: '51%',
+            <p className="center-sr" style={{
+                top: '86%',
                 fontFamily: `${meme.font}`,
                 color: `rgba(${meme.fontColor.r}, ${meme.fontColor.g}, ${meme.fontColor.b}, ${meme.fontColor.a})`,
             }}>{props.meme.sentence2}</p>
@@ -61,23 +61,16 @@ const SpongebobRainbow = (props) => {
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-// TODO
 const IfTheyCouldRead = (props) => {
     const { meme, style, className } = props;
 
     return (
         <>
             <img src={images[meme.image].default} style={style} className={className} />
-            <p className="center" style={{
-                top: '2%',
+            <p className="center-itcr" style={{
                 fontFamily: `${meme.font}`,
                 color: `rgba(${meme.fontColor.r}, ${meme.fontColor.g}, ${meme.fontColor.b}, ${meme.fontColor.a})`,
             }}>{props.meme.sentence1}</p>
-            <p className="center" style={{
-                top: '51%',
-                fontFamily: `${meme.font}`,
-                color: `rgba(${meme.fontColor.r}, ${meme.fontColor.g}, ${meme.fontColor.b}, ${meme.fontColor.a})`,
-            }}>{props.meme.sentence2}</p>
         </>
     );
 }
