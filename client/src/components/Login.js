@@ -22,7 +22,7 @@ function LoginForm(props) {
 
         if (valid) {
             props.login(credentials)
-                .catch((err) => { setErrorMessage(err); setShow(true); })
+                .catch((err) => { setErrorMessage(String(err)); setShow(true); })
         }
     };
 

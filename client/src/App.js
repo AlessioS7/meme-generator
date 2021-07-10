@@ -2,7 +2,7 @@ import './App.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import { React, useState, useEffect } from 'react';
 import { BrowserRouter as Router, Route, useRouteMatch, useHistory, Switch, Redirect } from 'react-router-dom';
-import { Container, Row, Col } from 'react-bootstrap/';
+import { Container, Row, Col, Spinner, Toast } from 'react-bootstrap/';
 import Navigation from './components/Navigation';
 import API from './API'
 import { LoginForm } from './components/Login';
@@ -37,13 +37,14 @@ const Main = () => {
 
   //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-  const closeModal = () => {setShow(false); setSelectedMeme(null);};
+  const closeModal = () => { setShow(false); setSelectedMeme(null); };
   const showModal = () => setShow(true);
 
   //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-  // if another filter is selected, redirect to a new view/url
   const changeRoute = (route) => {
+    setMessage('');
+    setDirty(true); // to force loading new (possible) memes from other users as often as possible and to update message 
     setRoute(route);
     history.push("/" + route);
   }
@@ -54,6 +55,7 @@ const Main = () => {
   const handleErrors = (err) => {
     setMessage({ msg: err.error, type: 'danger' });
     console.log(err);
+    setDirty(false); // in case of server error this is required to block the spinner and to show the error message 
   }
 
   //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -82,9 +84,9 @@ const Main = () => {
 
   const addMeme = (meme) => {
     API.addMeme(meme)
-    .then(() => setDirty(true))
-    .catch(e => handleErrors(e));
-    
+      .then(() => setDirty(true))
+      .catch(e => handleErrors(e));
+
     setShow(false);
     changeRoute("");
   }
@@ -93,9 +95,9 @@ const Main = () => {
 
   const deleteMeme = (meme) => {
     API.deleteMeme(meme)
-    .then(() => setDirty(true))
-    .catch(e => handleErrors(e));
-    
+      .then(() => setDirty(true))
+      .catch(e => handleErrors(e));
+
     setShow(false);
   }
 
@@ -107,6 +109,7 @@ const Main = () => {
         .then(memes => {
           setMemesList(memes);
           setDirty(false);
+          if (route === "" && memes.length === 0) handleErrors({ error: "There are no memes to show." });
         })
         .catch(e => handleErrors(e));
     }
@@ -117,14 +120,14 @@ const Main = () => {
   const handleLogIn = async (credentials) => {
     try {
       const user = await API.logIn(credentials);
+      changeRoute("");
       setUser(user);
       setLoggedIn(true);
       setDirty(true);
-      changeRoute("");
     }
     catch (err) {
       // error is handled and visualized in the login form, do not manage error, throw it
-      // handleErrors(err)
+      //handleErrors(err)
       throw err;
     }
   }
@@ -147,26 +150,34 @@ const Main = () => {
       <Row>
         <Navigation onLogOut={handleLogOut} changeRoute={changeRoute} route={route} loggedIn={loggedIn} user={user} />
       </Row>
-      <Switch>
-        <Route path="/login">
-          <Row className="vh-100 below-nav">
-            {loggedIn ? <Redirect to="/" /> : <LoginForm login={handleLogIn} />}
-          </Row>
-        </Route>
-        <Route exact path="/">
-          <Row className="vh-100 below-nav">
-            <MemesList list={memesList} setSelectedMeme={setSelectedMeme} showModal={showModal} />
-          {selectedMeme && <Modals.ModalHome show={show} selectedMeme={getMemeById(selectedMeme)} closeModal={closeModal} user={user} changeRoute={changeRoute} deleteMeme={deleteMeme}/>}
-          </Row>
-        </Route>
-        <Route path="/createMeme">
-          <Row className="vh-100 below-nav">
-            {(route !== "" && !loggedIn) && <Redirect to="/" /> }
-            <TemplatesList setSelectedTemplate={setSelectedTemplate} showModal={showModal} route={route} loggedIn={loggedIn} changeRoute={changeRoute}/>
-            <Modals.ModalCreate show={show} selectedTemplate={selectedTemplate} cm={closeModal} user={user} addMeme={addMeme} selectedMeme={getMemeById(selectedMeme)}/>
-          </Row>
-        </Route>
-      </Switch>
+      {dirty ?
+        <Row><Spinner animation="border" className="spinner" variant="secondary" /></Row> :
+        <Switch>
+          <Route path="/login">
+              <Row className="vh-100 below-nav">
+                {loggedIn ? <Redirect to="/" /> : <LoginForm login={handleLogIn} />}
+              </Row>
+          </Route>
+          <Route exact path="/">
+            <Row>
+              <Toast show={message !== ''} onClose={() => setMessage('')} /*delay={3000}  autohide */ className="rounded toast">
+                <Toast.Header> <strong className="mr-auto">Message</strong> </Toast.Header>
+                <Toast.Body>{message?.msg}</Toast.Body>
+              </Toast>
+            </Row>
+            <Row className="vh-100 below-nav">
+              <MemesList list={memesList} setSelectedMeme={setSelectedMeme} showModal={showModal} />
+              {selectedMeme && <Modals.ModalHome show={show} selectedMeme={getMemeById(selectedMeme)} closeModal={closeModal} user={user} changeRoute={changeRoute} deleteMeme={deleteMeme} />}
+            </Row>
+          </Route>
+          <Route path="/createMeme">
+            <Row className="vh-100 below-nav">
+              {(route !== "" && !loggedIn) && <Redirect to="/" />}
+              <TemplatesList setSelectedTemplate={setSelectedTemplate} showModal={showModal} route={route} loggedIn={loggedIn} changeRoute={changeRoute} />
+              <Modals.ModalCreate show={show} selectedTemplate={selectedTemplate} cm={closeModal} user={user} addMeme={addMeme} selectedMeme={getMemeById(selectedMeme)} />
+            </Row>
+          </Route>
+        </Switch>}
     </Container>
   );
 }

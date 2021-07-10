@@ -20,13 +20,16 @@ async function logIn(credentials) {
     }
     else {
         // ERROR HANDLING
+        let toThrow = "";
         try {
             const errDetail = await response.json();
-            throw errDetail.message;
+            toThrow =  errDetail.message;
         }
-        catch (err) {
-            throw err;
+        catch (err) { // if we are here it means the json function didn't work
+            toThrow = "Internal Server Error";
         }
+
+        throw toThrow;
     }
 }
 
@@ -56,7 +59,7 @@ async function getMemes() {
     if (response.ok) {
         const memes = await response.json();
 
-        for (let i = 0; i < memes.length; i++){
+        for (let i = 0; i < memes.length; i++) {
             memes[i].fontColor = JSON.parse(memes[i].fontColor);
         }
 
@@ -64,13 +67,16 @@ async function getMemes() {
     }
     else {
         // ERROR HANDLING
+        let toThrow = "";
         try {
             const errDetail = await response.json();
-            throw errDetail.message;
+            toThrow = errDetail.message;
         }
-        catch (err) {
-            throw err;
+        catch (err) { // if we are here it means the json function didn't work
+            toThrow = {error: "Internal Server Error"};
         }
+        
+        throw toThrow;
     }
 }
 
@@ -92,13 +98,16 @@ async function addMeme(meme) {
     }
     else {
         // ERROR HANDLING
+        let toThrow = "";
         try {
             const errDetail = await response.json();
             throw errDetail.error;
         }
-        catch (err) {
-            throw err;
+        catch (err) { // if we are here it means the json function didn't work
+            toThrow = {error: "Internal Server Error"};
         }
+
+        throw toThrow;
     }
 }
 
@@ -114,13 +123,15 @@ async function deleteMeme(id) {
     }
     else {
         // ERROR HANDLING
+        let toThrow = "";
         try {
             const errDetail = await response.json();
             throw errDetail.error;
         }
-        catch (err) {
-            throw err;
+        catch (err) { // if we are here it means the json function didn't work
+            toThrow = {error: "Internal Server Error"};
         }
+        throw toThrow;
     }
 }
 

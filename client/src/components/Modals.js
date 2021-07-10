@@ -152,7 +152,6 @@ const ModalCreate = (props) => {
                                     </Form.Text>
                                 </Form.Group>
                                 <Form.Group controlId="checkbox" >
-                                    {console.log("TEST: " + publ + ", user" + user + ", creator: ")}
                                     <Form.Check className="d-flex align-items-center" type="checkbox" label="Public"
                                         checked={publ} onChange={(ev) => setPubl(ev.target.checked)}
                                         disabled={selectedMeme && selectedMeme.public !== 1 && selectedMeme.creator !== user} />
