@@ -98,7 +98,8 @@ const ModalCreate = (props) => {
     const mapImagesNumSentences = {
         "drake.jpg": { "sentence2": false, "sentence3": true, "ml": 150 },
         "spongebobRainbow.jpg": { "sentence2": false, "sentence3": true, "ml": 22 },
-        "ifTheyCouldRead.png": { "sentence2": true, "sentence3": true, "ml": 60 }
+        "ifTheyCouldRead.png": { "sentence2": true, "sentence3": true, "ml": 60 },
+        "spidermen.jpg": { "sentence2": false, "sentence3": true, "ml": 25 }
     };
 
     return (

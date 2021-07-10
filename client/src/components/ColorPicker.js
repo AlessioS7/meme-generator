@@ -49,10 +49,10 @@ const ColorPicker = (props) => {
 
     return (
         <>
-            <div style={styles.swatch} onClick={handleClick}>
+            <div style={styles.swatch} onClick={handleClick} className="text-secondary">
                 <div style={styles.color} />
             </div>
-            {textColor.displayColorPicker ? <div style={styles.popover}>
+            {textColor.displayColorPicker ? <div style={styles.popover} >
                 <div style={styles.cover} onClick={handleClose} />
                 <SketchPicker color={textColor.color} onChange={handleChange} />
             </div> : null}

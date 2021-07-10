@@ -22,12 +22,12 @@ const Drake = (props) => {
     return (
         <>
             <img src={images[meme.image].default} style={style} className={className} />
-            <p className="center-drake" style={{
+            <p className="sentence pos-sentence-drake" style={{
                 top: '2%',
                 fontFamily: `${meme.font}`,
                 color: `rgba(${meme.fontColor.r}, ${meme.fontColor.g}, ${meme.fontColor.b}, ${meme.fontColor.a})`,
             }}>{props.meme.sentence1}</p>
-            <p className="center-drake" style={{
+            <p className="sentence pos-sentence-drake" style={{
                 top: '51%',
                 fontFamily: `${meme.font}`,
                 color: `rgba(${meme.fontColor.r}, ${meme.fontColor.g}, ${meme.fontColor.b}, ${meme.fontColor.a})`,
@@ -38,19 +38,18 @@ const Drake = (props) => {
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-// TODO
 const SpongebobRainbow = (props) => {
     const { meme, style, className } = props;
 
     return (
         <>
             <img src={images[meme.image].default} style={style} className={className} />
-            <p className="center-sr" style={{
+            <p className="sentence pos-sentence-sr" style={{
                 top: '1%',
                 fontFamily: `${meme.font}`,
                 color: `rgba(${meme.fontColor.r}, ${meme.fontColor.g}, ${meme.fontColor.b}, ${meme.fontColor.a})`,
             }}>{props.meme.sentence1}</p>
-            <p className="center-sr" style={{
+            <p className="sentence pos-sentence-sr" style={{
                 top: '86%',
                 fontFamily: `${meme.font}`,
                 color: `rgba(${meme.fontColor.r}, ${meme.fontColor.g}, ${meme.fontColor.b}, ${meme.fontColor.a})`,
@@ -67,7 +66,7 @@ const IfTheyCouldRead = (props) => {
     return (
         <>
             <img src={images[meme.image].default} style={style} className={className} />
-            <p className="center-itcr" style={{
+            <p className="sentence pos-sentence-itcr" style={{
                 fontFamily: `${meme.font}`,
                 color: `rgba(${meme.fontColor.r}, ${meme.fontColor.g}, ${meme.fontColor.b}, ${meme.fontColor.a})`,
             }}>{props.meme.sentence1}</p>
@@ -77,10 +76,33 @@ const IfTheyCouldRead = (props) => {
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
+const Spidermen = (props) => {
+    const { meme, style, className } = props;
+
+    return (
+        <>
+            <img src={images[meme.image].default} style={style} className={className} />
+            <p className="sentence pos-sentence-spider" style={{
+                left: '14%',
+                fontFamily: `${meme.font}`,
+                color: `rgba(${meme.fontColor.r}, ${meme.fontColor.g}, ${meme.fontColor.b}, ${meme.fontColor.a})`,
+            }}>{props.meme.sentence1}</p>
+            <p className="sentence pos-sentence-spider" style={{
+                left: '59%',
+                fontFamily: `${meme.font}`,
+                color: `rgba(${meme.fontColor.r}, ${meme.fontColor.g}, ${meme.fontColor.b}, ${meme.fontColor.a})`,
+            }}>{props.meme.sentence2}</p>
+        </>
+    );
+}
+
+/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
 const mapImagesComponents = {
     "drake.jpg": Drake,
     "spongebobRainbow.jpg": SpongebobRainbow,
-    "ifTheyCouldRead.png": IfTheyCouldRead
+    "ifTheyCouldRead.png": IfTheyCouldRead,
+    "spidermen.jpg": Spidermen
 };
 
 export default MemeWrapper;
