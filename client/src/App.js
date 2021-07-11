@@ -49,6 +49,9 @@ const Main = () => {
     history.push("/" + route);
   }
 
+  if (route === "login" && loggedIn === true)
+  changeRoute(""); // needed to properly show the logout button when the user type manually the URL "/login" when already logged in
+
   //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
   // show error message in toast
@@ -156,9 +159,9 @@ const Main = () => {
         <Row><Spinner animation="border" className="spinner" variant="secondary" /></Row> :
         <Switch>
           <Route path="/login">
-              <Row className="vh-100 below-nav">
-                {loggedIn ? <Redirect to="/" /> : <LoginForm login={handleLogIn} />}
-              </Row>
+            <Row className="vh-100 below-nav">
+              {loggedIn ? <Redirect to="/" /> : <LoginForm login={handleLogIn} />}
+            </Row>
           </Route>
           <Route exact path="/">
             <Row>
