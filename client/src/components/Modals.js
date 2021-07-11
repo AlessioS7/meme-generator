@@ -85,14 +85,14 @@ const ModalCreate = (props) => {
         setPubl(false);
 
         cm();
-    } 
+    }
 
     const mapImagesNumSentences = {
         "drake.jpg": { "sentence2": false, "sentence3": true, "ml": 150 },
         "spongebobRainbow.jpg": { "sentence2": false, "sentence3": true, "ml": 18 },
         "ifTheyCouldRead.png": { "sentence2": false, "sentence3": true, "ml": 27 },
         "spidermen.jpg": { "sentence2": false, "sentence3": true, "ml": 25 },
-        "lisa.jpg": { "sentence2": true, "sentence3": true, "ml": 100 },
+        "lisa.jpg": { "sentence2": true, "sentence3": true, "ml": 48 },
         "swimWaterBottle.jpg": { "sentence2": true, "sentence3": true, "ml": 50 },
         "distractedBoyfriend.jpg": { "sentence2": false, "sentence3": false, "ml": 30 },
         "expandingBrain.jpg": { "sentence2": false, "sentence3": false, "ml": 45 }

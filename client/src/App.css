@@ -53,10 +53,21 @@
   margin-bottom: 1.8em;
 }
 
+.homeTitle {
+  font-size: 1rem;
+  box-shadow: 0px 14px 80px rgba(34, 35, 58, 0.2);
+  border: 1.2px solid #6c757d;
+  border-radius: 7px 7px 0 0 ;
+  border-bottom: 0;
+  background-color: /* #343a40 */ #5a6268;
+  color: white;
+  padding: 2%;
+}
+
 .previewMeme img {
   box-shadow: 0px 14px 80px rgba(34, 35, 58, 0.2);
   border: 1.2px solid #6c757d;
-  border-radius: 2%;
+  border-radius: 0% 0% 2% 2%;
   height: 100%;
   width: 100%;
 }
@@ -121,7 +132,7 @@
 
 .pos-sentence-lisa {   
   height: 50%; 
-  top: 11%;
+  top: 13%;
   max-height: 44%;
   max-width: 65%;
   min-width: 65%;

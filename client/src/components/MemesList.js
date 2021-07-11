@@ -9,7 +9,8 @@ const MemesList = (props) => {
                 {list.map(m => {
                     return (
                         <Col key={m.id} className="previewMeme clickable" onClick={() => {setSelectedMeme(m.id); showModal()}}>
-                            <MemeWrapper meme={m} style={{height: '350px'}}/>
+                            <div className="homeTitle"><strong className="ml-1">{m.title}</strong></div>
+                            <div class="position-sticky"><MemeWrapper meme={m} style={{height: '350px'}}/></div>
                         </Col>
                     );
                 })}
