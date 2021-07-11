@@ -3,8 +3,8 @@ import MemeWrapper from './Memes';
 import { useState } from 'react';
 import ColorPicker from './ColorPicker';
 
-/* const squaredImages = ["spongebobRainbow.jpg", "dad.jpg"];
-const modalSize = (image) => squaredImages.includes(image); */
+const squaredImages = ["spongebobRainbow.jpg", "distractedBoyfriend.jpg", "swimWaterBottle.jpg"];
+const modalSize = (image) => squaredImages.includes(image);
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
@@ -30,7 +30,7 @@ const ModalHome = (props) => {
     const { show, selectedMeme, closeModal, user, changeRoute, deleteMeme } = props;
 
     return (
-        <Modal show={show} onHide={closeModal} centered /* size={selectedMeme && modalSize(selectedMeme.image) ? "lg" : "md"} */ >
+        <Modal show={show} onHide={closeModal} centered size={selectedMeme && modalSize(selectedMeme.image) ? "lg" : "md"} >
             < Modal.Header closeButton >
                 <Modal.Title>{selectedMeme ? selectedMeme.title : ""}</Modal.Title>
             </Modal.Header >
@@ -100,15 +100,15 @@ const ModalCreate = (props) => {
 
     return (
         <Modal show={show} onHide={closeModal} size="xl" centered>
-            < Modal.Header closeButton >
+            < Modal.Header closeButton className="m-1 p-1">
                 <Modal.Title>Create your meme</Modal.Title>
             </Modal.Header >
-            <Modal.Body style={{ height: '82vh' }}>
-                <Row className="h-100">
+            <Modal.Body className="m-1 p-0">
+                <Row>
                     <Col className="templateCreate"><MemeWrapper meme={meme} style={{ height: '99%', width: '99%' }} /></Col>
                     <Col className="border-left border-secondary">
-                        <Form onSubmit={handleSubmit} >
-                            <Modal.Body>
+                        <Form onSubmit={handleSubmit}>
+                            <Modal.Body >
                                 <Form.Control type="text" placeholder="Title" value={title}
                                     onChange={(ev) => setTitle(ev.target.value)} required autoFocus />
                                 <br />

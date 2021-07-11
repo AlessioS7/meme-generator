@@ -20,7 +20,7 @@ const TemplatesList = (props) => {
                 {Object.entries(images).map(elem => {
                     return (
                         <Col className="previewMeme clickable" onClick={() => {setSelectedTemplate(elem[0]); showModal()}}>
-                            <img src={elem[1].default} style={{height: '255px'}} alt="selected template"/>
+                            <img src={elem[1].default} style={{height: '255px', borderRadius: '3%'}} alt="selected template"/>
                         </Col>
                     );
                 })}
