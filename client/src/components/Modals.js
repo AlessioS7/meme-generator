@@ -1,15 +1,7 @@
-import { Modal, Button, Col, Row, Alert, Form } from 'react-bootstrap';
+import { Modal, Button, Col, Row, Form } from 'react-bootstrap';
 import MemeWrapper from './Memes';
 import { useState } from 'react';
 import ColorPicker from './ColorPicker';
-
-function importAll(r) {
-    let images = {};
-    r.keys().map((item, index) => { images[item.replace('./', '')] = r(item); });
-    return images;
-}
-
-const images = importAll(require.context('./images', false, /\.(png|jpe?g|svg)$/));
 
 /* const squaredImages = ["spongebobRainbow.jpg", "dad.jpg"];
 const modalSize = (image) => squaredImages.includes(image); */

@@ -1,4 +1,3 @@
-import { Image } from 'react-bootstrap';
 import { Container, Row, Col } from 'react-bootstrap';
 
 function importAll(r) {
@@ -21,7 +20,7 @@ const TemplatesList = (props) => {
                 {Object.entries(images).map(elem => {
                     return (
                         <Col className="previewMeme clickable" onClick={() => {setSelectedTemplate(elem[0]); showModal()}}>
-                            <img src={elem[1].default} style={{height: '255px'}}/>
+                            <img src={elem[1].default} style={{height: '255px'}} alt="selected template"/>
                         </Col>
                     );
                 })}

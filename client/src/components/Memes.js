@@ -1,5 +1,3 @@
-import { Image } from 'react-bootstrap';
-import { Container, Row, Col } from 'react-bootstrap';
 
 function importAll(r) {
     let images = {};
@@ -21,7 +19,7 @@ const Drake = (props) => {
     const { meme, style, className } = props;
     return (
         <>
-            <img src={images[meme.image].default} style={style} className={className} />
+            <img src={images[meme.image].default} style={style} className={className} alt="drake"/>
             <p className="sentence pos-sentence-drake" style={{
                 top: '2%',
                 fontFamily: `${meme.font}`,
@@ -43,7 +41,7 @@ const SpongebobRainbow = (props) => {
 
     return (
         <>
-            <img src={images[meme.image].default} style={style} className={className} />
+            <img src={images[meme.image].default} style={style} className={className} alt="spongebob rainbow"/>
             <p className="sentence pos-sentence-sr" style={{
                 top: '4%',
                 fontFamily: `${meme.font}`,
@@ -65,7 +63,7 @@ const IfTheyCouldRead = (props) => {
 
     return (
         <>
-            <img src={images[meme.image].default} style={style} className={className} />
+            <img src={images[meme.image].default} style={style} className={className} alt="if they could read"/>
             <p className="sentence pos-sentence-itcr" style={{
                 left: '36%',
                 top: '10%',
@@ -89,7 +87,7 @@ const Spidermen = (props) => {
 
     return (
         <>
-            <img src={images[meme.image].default} style={style} className={className} />
+            <img src={images[meme.image].default} style={style} className={className} alt="spidermen"/>
             <p className="sentence pos-sentence-spider" style={{
                 left: '14%',
                 fontFamily: `${meme.font}`,
@@ -111,7 +109,7 @@ const Lisa = (props) => {
 
     return (
         <>
-            <img src={images[meme.image].default} style={style} className={className} />
+            <img src={images[meme.image].default} style={style} className={className} alt="lisa"/>
             <p className="sentence pos-sentence-lisa" style={{
                 fontFamily: `${meme.font}`,
                 color: `rgba(${meme.fontColor.r}, ${meme.fontColor.g}, ${meme.fontColor.b}, ${meme.fontColor.a})`,
@@ -127,7 +125,7 @@ const SwimWaterBottle = (props) => {
 
     return (
         <>
-            <img src={images[meme.image].default} style={style} className={className} />
+            <img src={images[meme.image].default} style={style} className={className} alt="swim water bottle"/>
             <p className="sentence pos-sentence-swim" style={{
                 fontFamily: `${meme.font}`,
                 color: `rgba(${meme.fontColor.r}, ${meme.fontColor.g}, ${meme.fontColor.b}, ${meme.fontColor.a})`,
@@ -143,7 +141,7 @@ const DistractedBoyfriend = (props) => {
 
     return (
         <>
-            <img src={images[meme.image].default} style={style} className={className} />
+            <img src={images[meme.image].default} style={style} className={className} alt="distracted boyfriend"/>
             <p className="sentence pos-sentence-db" style={{
                 left: '17%',
                 top: '55%',
@@ -173,7 +171,7 @@ const ExpandingBrain = (props) => {
 
     return (
         <>
-            <img src={images[meme.image].default} style={style} className={className} />
+            <img src={images[meme.image].default} style={style} className={className} alt="expanding brain"/>
             <p className="sentence pos-sentence-eb" style={{
                 top: '1%',
                 fontFamily: `${meme.font}`,
