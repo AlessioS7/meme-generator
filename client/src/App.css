@@ -79,7 +79,7 @@
   align-items: center;
   text-align: center;        
   position: absolute;
-  /* border: solid 2px #282c34; */
+  /* border: solid 2px gray; */
   overflow-wrap: break-word;   word-wrap: break-word;   hyphens: auto;
   text-shadow: -1px 0 black, 0 1px black, 1px 0 black, 0 -1px black;
 }
@@ -94,10 +94,8 @@
 }
 
 .pos-sentence-itcr {   
-  height: 50%; 
-  left: 36%;
-  top: 8%;
-  max-height: 28%;
+  height: 22%; 
+  max-height: 22%;
   max-width: 24%;
   min-width: 24%;
   font-size: 15px;
@@ -115,12 +113,47 @@
 .pos-sentence-spider {   
   height: 50%; 
   top: 15%;
-  /* border: solid 2px #282c34; */
   max-height: 33%;
   max-width: 30%;
   min-width: 30%;
   font-size: 25px;
-  text-shadow: -0.1px 0 black, 0 0.1px black, 0.1px 0 black, 0 -0.1px black;
+}
+
+.pos-sentence-lisa {   
+  height: 50%; 
+  top: 11%;
+  max-height: 44%;
+  max-width: 65%;
+  min-width: 65%;
+  left: 20%;
+  font-size: 25px;
+}
+
+.pos-sentence-swim {   
+  height: 50%; 
+  top: 74%;
+  max-height: 20%;
+  max-width: 90%;
+  min-width: 90%;
+  left: 5%;
+  font-size: 25px;
+}
+
+.pos-sentence-db {   
+  height: 50%; 
+  max-height: 50%;
+  max-width: 25%;
+  min-width: 25%;
+  font-size: 20px;
+}
+
+.pos-sentence-eb {   
+  height: 30%; 
+  max-height: 30%;
+  max-width: 45%;
+  min-width: 45%;
+  left: 6%;
+  font-size: 17px;
 }
 
 .templateCreate {

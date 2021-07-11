@@ -11,8 +11,8 @@ function importAll(r) {
 
 const images = importAll(require.context('./images', false, /\.(png|jpe?g|svg)$/));
 
-const squaredImages = ["spongebobRainbow.jpg", "dad.jpg"];
-const modalSize = (image) => squaredImages.includes(image);
+/* const squaredImages = ["spongebobRainbow.jpg", "dad.jpg"];
+const modalSize = (image) => squaredImages.includes(image); */
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
@@ -38,7 +38,7 @@ const ModalHome = (props) => {
     const { show, selectedMeme, closeModal, user, changeRoute, deleteMeme } = props;
 
     return (
-        <Modal show={show} onHide={closeModal} centered size={selectedMeme && modalSize(selectedMeme.image) ? "lg" : "md"} >
+        <Modal show={show} onHide={closeModal} centered /* size={selectedMeme && modalSize(selectedMeme.image) ? "lg" : "md"} */ >
             < Modal.Header closeButton >
                 <Modal.Title>{selectedMeme ? selectedMeme.title : ""}</Modal.Title>
             </Modal.Header >
@@ -97,9 +97,13 @@ const ModalCreate = (props) => {
 
     const mapImagesNumSentences = {
         "drake.jpg": { "sentence2": false, "sentence3": true, "ml": 150 },
-        "spongebobRainbow.jpg": { "sentence2": false, "sentence3": true, "ml": 22 },
-        "ifTheyCouldRead.png": { "sentence2": true, "sentence3": true, "ml": 60 },
-        "spidermen.jpg": { "sentence2": false, "sentence3": true, "ml": 25 }
+        "spongebobRainbow.jpg": { "sentence2": false, "sentence3": true, "ml": 18 },
+        "ifTheyCouldRead.png": { "sentence2": false, "sentence3": true, "ml": 27 },
+        "spidermen.jpg": { "sentence2": false, "sentence3": true, "ml": 25 },
+        "lisa.jpg": { "sentence2": true, "sentence3": true, "ml": 100 },
+        "swimWaterBottle.jpg": { "sentence2": true, "sentence3": true, "ml": 50 },
+        "distractedBoyfriend.jpg": { "sentence2": false, "sentence3": false, "ml": 30 },
+        "expandingBrain.jpg": { "sentence2": false, "sentence3": false, "ml": 45 }
     };
 
     return (
@@ -123,8 +127,8 @@ const ModalCreate = (props) => {
                                     <Col sm="7">
                                         <Form.Control as="select" value={font} onChange={(ev) => setFont(ev.target.value)}>
                                             <option>Arial</option>
-                                            <option>Calibri</option>
-                                            <option>Roboto</option>
+                                            <option>Cursive</option>
+                                            <option>Georgia</option>
                                         </Form.Control>
                                     </Col>
                                     <Col sm="1" className="d-flex align-items-center offset-2">

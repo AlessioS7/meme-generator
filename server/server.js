@@ -111,7 +111,7 @@ app.post('/api/memes',
   isLoggedIn,
   [
     check('title').isLength({ min: 1, max: 160 }),
-    check('image').isLength({ min: 1, max: 20 }),
+    check('image').isLength({ min: 1, max: 50 }),
     check('creator').isLength({ min: 1, max: 20 })
     // that at least a sentence is given is checked directly in the front end
   ],

@@ -45,12 +45,12 @@ const SpongebobRainbow = (props) => {
         <>
             <img src={images[meme.image].default} style={style} className={className} />
             <p className="sentence pos-sentence-sr" style={{
-                top: '1%',
+                top: '4%',
                 fontFamily: `${meme.font}`,
                 color: `rgba(${meme.fontColor.r}, ${meme.fontColor.g}, ${meme.fontColor.b}, ${meme.fontColor.a})`,
             }}>{props.meme.sentence1}</p>
             <p className="sentence pos-sentence-sr" style={{
-                top: '86%',
+                top: '83%',
                 fontFamily: `${meme.font}`,
                 color: `rgba(${meme.fontColor.r}, ${meme.fontColor.g}, ${meme.fontColor.b}, ${meme.fontColor.a})`,
             }}>{props.meme.sentence2}</p>
@@ -67,9 +67,17 @@ const IfTheyCouldRead = (props) => {
         <>
             <img src={images[meme.image].default} style={style} className={className} />
             <p className="sentence pos-sentence-itcr" style={{
+                left: '36%',
+                top: '10%',
                 fontFamily: `${meme.font}`,
                 color: `rgba(${meme.fontColor.r}, ${meme.fontColor.g}, ${meme.fontColor.b}, ${meme.fontColor.a})`,
             }}>{props.meme.sentence1}</p>
+            <p className="sentence pos-sentence-itcr" style={{
+                left: '58%',
+                top: '55%',
+                fontFamily: `${meme.font}`,
+                color: `rgba(${meme.fontColor.r}, ${meme.fontColor.g}, ${meme.fontColor.b}, ${meme.fontColor.a})`,
+            }}>{props.meme.sentence2}</p>
         </>
     );
 }
@@ -98,11 +106,104 @@ const Spidermen = (props) => {
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
+const Lisa = (props) => {
+    const { meme, style, className } = props;
+
+    return (
+        <>
+            <img src={images[meme.image].default} style={style} className={className} />
+            <p className="sentence pos-sentence-lisa" style={{
+                fontFamily: `${meme.font}`,
+                color: `rgba(${meme.fontColor.r}, ${meme.fontColor.g}, ${meme.fontColor.b}, ${meme.fontColor.a})`,
+            }}>{props.meme.sentence1}</p>
+        </>
+    );
+}
+
+/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+const SwimWaterBottle = (props) => {
+    const { meme, style, className } = props;
+
+    return (
+        <>
+            <img src={images[meme.image].default} style={style} className={className} />
+            <p className="sentence pos-sentence-swim" style={{
+                fontFamily: `${meme.font}`,
+                color: `rgba(${meme.fontColor.r}, ${meme.fontColor.g}, ${meme.fontColor.b}, ${meme.fontColor.a})`,
+            }}>{props.meme.sentence1}</p>
+        </>
+    );
+}
+
+/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+const DistractedBoyfriend = (props) => {
+    const { meme, style, className } = props;
+
+    return (
+        <>
+            <img src={images[meme.image].default} style={style} className={className} />
+            <p className="sentence pos-sentence-db" style={{
+                left: '17%',
+                top: '55%',
+                fontFamily: `${meme.font}`,
+                color: `rgba(${meme.fontColor.r}, ${meme.fontColor.g}, ${meme.fontColor.b}, ${meme.fontColor.a})`,
+            }}>{props.meme.sentence1}</p>
+            <p className="sentence pos-sentence-db" style={{
+                left: '48%',
+                top: '20%',
+                fontFamily: `${meme.font}`,
+                color: `rgba(${meme.fontColor.r}, ${meme.fontColor.g}, ${meme.fontColor.b}, ${meme.fontColor.a})`,
+            }}>{props.meme.sentence2}</p>
+            <p className="sentence pos-sentence-db" style={{
+                left: '70%',
+                top: '53%',
+                fontFamily: `${meme.font}`,
+                color: `rgba(${meme.fontColor.r}, ${meme.fontColor.g}, ${meme.fontColor.b}, ${meme.fontColor.a})`,
+            }}>{props.meme.sentence3}</p>
+        </>
+    );
+}
+
+/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+const ExpandingBrain = (props) => {
+    const { meme, style, className } = props;
+
+    return (
+        <>
+            <img src={images[meme.image].default} style={style} className={className} />
+            <p className="sentence pos-sentence-eb" style={{
+                top: '1%',
+                fontFamily: `${meme.font}`,
+                color: `rgba(${meme.fontColor.r}, ${meme.fontColor.g}, ${meme.fontColor.b}, ${meme.fontColor.a})`,
+            }}>{props.meme.sentence1}</p>
+            <p className="sentence pos-sentence-eb" style={{
+                top: '35%',
+                fontFamily: `${meme.font}`,
+                color: `rgba(${meme.fontColor.r}, ${meme.fontColor.g}, ${meme.fontColor.b}, ${meme.fontColor.a})`,
+            }}>{props.meme.sentence2}</p>
+            <p className="sentence pos-sentence-eb" style={{
+                top: '68%',
+                fontFamily: `${meme.font}`,
+                color: `rgba(${meme.fontColor.r}, ${meme.fontColor.g}, ${meme.fontColor.b}, ${meme.fontColor.a})`,
+            }}>{props.meme.sentence3}</p>
+        </>
+    );
+}
+
+/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
 const mapImagesComponents = {
     "drake.jpg": Drake,
     "spongebobRainbow.jpg": SpongebobRainbow,
     "ifTheyCouldRead.png": IfTheyCouldRead,
-    "spidermen.jpg": Spidermen
+    "spidermen.jpg": Spidermen,
+    "lisa.jpg": Lisa,
+    "swimWaterBottle.jpg": SwimWaterBottle,
+    "distractedBoyfriend.jpg": DistractedBoyfriend,
+    "expandingBrain.jpg": ExpandingBrain
 };
 
 export default MemeWrapper;

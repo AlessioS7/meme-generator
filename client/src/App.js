@@ -69,6 +69,8 @@ const Main = () => {
         setUser(user);
         setLoggedIn(true);
       } catch (err) {
+        setUser(null);
+        setLoggedIn(false);
         console.log("No logged user"); // mostly unauthenticated user
       }
       changeRoute(window.location.pathname.substring(1));

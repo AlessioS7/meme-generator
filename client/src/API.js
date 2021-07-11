@@ -101,7 +101,7 @@ async function addMeme(meme) {
         let toThrow = "";
         try {
             const errDetail = await response.json();
-            throw errDetail.error;
+            toThrow = {error: errDetail.error} ;
         }
         catch (err) { // if we are here it means the json function didn't work
             toThrow = {error: "Internal Server Error"};
@@ -126,7 +126,7 @@ async function deleteMeme(id) {
         let toThrow = "";
         try {
             const errDetail = await response.json();
-            throw errDetail.error;
+            toThrow = errDetail.error;
         }
         catch (err) { // if we are here it means the json function didn't work
             toThrow = {error: "Internal Server Error"};
