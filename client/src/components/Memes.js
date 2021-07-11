@@ -143,7 +143,7 @@ const DistractedBoyfriend = (props) => {
         <>
             <img src={images[meme.image].default} style={style} className={className} alt="distracted boyfriend"/>
             <p className="sentence pos-sentence-db" style={{
-                left: '17%',
+                left: '16%',
                 top: '55%',
                 fontFamily: `${meme.font}`,
                 color: `rgba(${meme.fontColor.r}, ${meme.fontColor.g}, ${meme.fontColor.b}, ${meme.fontColor.a})`,
