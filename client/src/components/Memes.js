@@ -48,7 +48,7 @@ const SpongebobRainbow = (props) => {
                 color: `rgba(${meme.fontColor.r}, ${meme.fontColor.g}, ${meme.fontColor.b}, ${meme.fontColor.a})`,
             }}>{props.meme.sentence1}</p>
             <p className="sentence pos-sentence-sr" style={{
-                top: '83%',
+                top: '81%',
                 fontFamily: `${meme.font}`,
                 color: `rgba(${meme.fontColor.r}, ${meme.fontColor.g}, ${meme.fontColor.b}, ${meme.fontColor.a})`,
             }}>{props.meme.sentence2}</p>
