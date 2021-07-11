@@ -101,7 +101,7 @@ const ModalCreate = (props) => {
     return (
         <Modal show={show} onHide={closeModal} size="xl" centered>
             < Modal.Header closeButton className="m-1 p-1">
-                <Modal.Title>Create your meme</Modal.Title>
+                <Modal.Title className="d-flex align-items-center">Create your meme</Modal.Title>
             </Modal.Header >
             <Modal.Body className="m-1 p-0">
                 <Row>
