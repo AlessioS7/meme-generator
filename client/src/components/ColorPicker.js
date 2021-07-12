@@ -1,6 +1,7 @@
 import reactCSS from 'reactcss'
 import { SketchPicker } from 'react-color'
 
+// ColorPicker component
 const ColorPicker = (props) => {
     const { textColor, setTextColor } = props;
 
@@ -47,6 +48,7 @@ const ColorPicker = (props) => {
         },
     });
 
+    // JSX
     return (
         <>
             <div style={styles.swatch} onClick={handleClick} className="text-secondary">
@@ -59,5 +61,6 @@ const ColorPicker = (props) => {
         </>
     );
 }
+
 
 export default ColorPicker;

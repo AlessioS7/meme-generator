@@ -2,9 +2,11 @@ import { Navbar, Button, Image } from 'react-bootstrap/';
 import logo from '../logo.png';
 import { LogoutButton } from './Login';
 
+// Navigation bar component
 const Navigation = (props) => {
     const { onLogOut, changeRoute, route, loggedIn, user } = props;
-    //changeRoute("createMeme")
+
+    // JSX
     return (
         <Navbar bg="dark" variant="dark" fixed="top" expand="lg" className="justify-content-between">
             <Navbar.Brand onClick={() => changeRoute("")} className="clickable">
@@ -14,7 +16,7 @@ const Navigation = (props) => {
             {route === "login" ? <></> : loggedIn ?
                 <div>
                     <Navbar.Text className="mr-3">Welcome, {user}!</Navbar.Text>
-                    {/* window.location.pathname.endsWith("/") */ route === "" ?
+                    {route === "" ?
                         <Button variant="secondary" className="mr-2" onClick={() => changeRoute("createMeme")}>Create a meme</Button> : <></>}
                     <LogoutButton logout={onLogOut} />
                 </div> :
@@ -22,5 +24,6 @@ const Navigation = (props) => {
         </Navbar>
     );
 }
+
 
 export default Navigation;

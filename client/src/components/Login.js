@@ -1,6 +1,7 @@
 import { Form, Button, Alert, Modal } from 'react-bootstrap';
 import { useState } from 'react';
 
+// LoginForm component
 function LoginForm(props) {
     const [username, setUsername] = useState('');
     const [password, setPassword] = useState('');
@@ -12,7 +13,7 @@ function LoginForm(props) {
         setErrorMessage('');
         const credentials = { username, password };
 
-        // basic validation
+        // form validation
         let valid = true;
         if (username === '' || password === '' || password.length < 6) {
             valid = false;
@@ -26,7 +27,7 @@ function LoginForm(props) {
         }
     };
 
-
+    // JSX
     return (
         <Form onSubmit={handleSubmit} className="authForm">
             <Modal.Header>
@@ -64,6 +65,7 @@ function LoginForm(props) {
     );
 }
 
+// LogoutButton component
 function LogoutButton(props) {
     return (
         <Button variant="secondary" onClick={props.logout}>Logout</Button>

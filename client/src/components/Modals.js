@@ -3,32 +3,35 @@ import MemeWrapper from './Memes';
 import { useState } from 'react';
 import ColorPicker from './ColorPicker';
 
+// this squaredImages array  is exploited to better visualize squared when clicking on them in the home page 
 const squaredImages = ["spongebobRainbow.jpg", "distractedBoyfriend.jpg", "swimWaterBottle.jpg"];
 const modalSize = (image) => squaredImages.includes(image);
 
-/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-
+// Public icon 
 const Public = () => {
     return (
-        <svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" fill="currentColor" class="bi bi-eye-fill text-success" viewBox="0 0 16 16">
+        <svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" fill="currentColor" className="bi bi-eye-fill text-success" viewBox="0 0 16 16">
             <path d="M10.5 8a2.5 2.5 0 1 1-5 0 2.5 2.5 0 0 1 5 0z" />
             <path d="M0 8s3-5.5 8-5.5S16 8 16 8s-3 5.5-8 5.5S0 8 0 8zm8 3.5a3.5 3.5 0 1 0 0-7 3.5 3.5 0 0 0 0 7z" />
         </svg>
     );
 }
 
+// Protected icon 
 const Protected = () => {
     return (
-        <svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" fill="currentColor" class="bi bi-eye-slash-fill text-danger" viewBox="0 0 16 16">
+        <svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" fill="currentColor" className="bi bi-eye-slash-fill text-danger" viewBox="0 0 16 16">
             <path d="m10.79 12.912-1.614-1.615a3.5 3.5 0 0 1-4.474-4.474l-2.06-2.06C.938 6.278 0 8 0 8s3 5.5 8 5.5a7.029 7.029 0 0 0 2.79-.588zM5.21 3.088A7.028 7.028 0 0 1 8 2.5c5 0 8 5.5 8 5.5s-.939 1.721-2.641 3.238l-2.062-2.062a3.5 3.5 0 0 0-4.474-4.474L5.21 3.089z" />
             <path d="M5.525 7.646a2.5 2.5 0 0 0 2.829 2.829l-2.83-2.829zm4.95.708-2.829-2.83a2.5 2.5 0 0 1 2.829 2.829zm3.171 6-12-12 .708-.708 12 12-.708.708z" />
         </svg>
     );
 }
 
+// ModalHome component (modal opened when clicking on a meme in the home page)
 const ModalHome = (props) => {
     const { show, selectedMeme, closeModal, user, changeRoute, deleteMeme } = props;
 
+    // JSX
     return (
         <Modal show={show} onHide={closeModal} centered size={selectedMeme && modalSize(selectedMeme.image) ? "lg" : "md"} >
             < Modal.Header closeButton >
@@ -36,7 +39,7 @@ const ModalHome = (props) => {
             </Modal.Header >
             <Modal.Body><MemeWrapper meme={selectedMeme} style={{ height: '100%', width: '100%' }} /></Modal.Body>
             <Modal.Footer>
-                <span className="rel-left">Author: {selectedMeme ? selectedMeme.creator : ""} <span class="tab-space">&nbsp;</span>
+                <span className="rel-left">Author: {selectedMeme ? selectedMeme.creator : ""} <span className="tab-space">&nbsp;</span>
                     {selectedMeme && selectedMeme.public ? <Public /> : <Protected />}
                 </span>
                 {user ? <Button variant="secondary" onClick={() => changeRoute("createMeme")}>Copy</Button> : <></>}
@@ -47,11 +50,11 @@ const ModalHome = (props) => {
     );
 }
 
-/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-
-// Modal create component
+// ModalCreate component (modal opened when clicking on a template while in /createMeme or when copying a meme from the home page)
 const ModalCreate = (props) => {
     const { show, selectedTemplate, cm, user, addMeme, selectedMeme, setSelectedMeme } = props;
+
+    // if selectedMeme is defined means we are copying a meme. We are creating a new meme from the just chosen template otherwise
     const [title, setTitle] = useState(selectedMeme ? selectedMeme.title : "");
     const [font, setFont] = useState(selectedMeme ? selectedMeme.font : "Arial");
     const color = selectedMeme ? selectedMeme.fontColor : { r: '0', g: '0', b: '0', a: '1' };
@@ -63,7 +66,7 @@ const ModalCreate = (props) => {
     const [showErrMessage, setShowErrMessage] = useState(false);
 
     const template = selectedMeme ? selectedMeme.image : selectedTemplate;
-    const meme = {
+    const meme = { // this is the variable that will be used to properly create the new meme
         title: title, image: template, font: font, fontColor: textColor.color,
         sentence1: sentence1, sentence2: sentence2, sentence3: sentence3, public: publ, creator: user
     };
@@ -73,7 +76,8 @@ const ModalCreate = (props) => {
         event.preventDefault();
         event.stopPropagation();
 
-        if (title && (sentence1 || sentence2 || sentence3)) { // Form validation
+        // Form validation
+        if (title && (sentence1 || sentence2 || sentence3)) { 
             setShowErrMessage(false);
             setSelectedMeme(null); // this line is needed to clear the modal for the next opening
             addMeme(meme);
@@ -95,6 +99,7 @@ const ModalCreate = (props) => {
         cm();
     }
 
+    // this object is useful to specify for every template the number of sentences it contains and the maximum number of characters per sentence
     const mapImagesNumSentences = {
         "drake.jpg": { "sentence2": false, "sentence3": true, "ml": 150 },
         "spongebobRainbow.jpg": { "sentence2": false, "sentence3": true, "ml": 18 },
@@ -106,6 +111,7 @@ const ModalCreate = (props) => {
         "expandingBrain.jpg": { "sentence2": false, "sentence3": false, "ml": 45 }
     };
 
+    // JSX
     return (
         <Modal show={show} onHide={closeModal} size="xl" centered>
             <Modal.Header closeButton className="m-1 p-1">
@@ -177,6 +183,7 @@ const ModalCreate = (props) => {
         </Modal >
     );
 }
+
 
 const Modals = { ModalHome, ModalCreate };
 export default Modals;

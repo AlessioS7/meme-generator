@@ -1,21 +1,18 @@
-
 function importAll(r) {
     let images = {};
-    r.keys().map((item, index) => { images[item.replace('./', '')] = r(item); });
+    r.keys().map((item, index) => images[item.replace('./', '')] = r(item));
     return images;
 }
-
+// Importing all the template images from the images folder
 const images = importAll(require.context('./images', false, /\.(png|jpe?g|svg)$/));
 
-/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-
+// MemeWrapper component (based on the image of the meme it renders the specific meme component)
 const MemeWrapper = (props) => {
 
     return mapImagesComponents[props.meme.image] ? mapImagesComponents[props.meme.image](props) : <></>;
 }
 
-/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-
+// Drake meme component
 const Drake = (props) => {
     const { meme, style, className } = props;
     return (
@@ -35,8 +32,7 @@ const Drake = (props) => {
     );
 }
 
-/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-
+// SpongebobRainbow meme component
 const SpongebobRainbow = (props) => {
     const { meme, style, className } = props;
 
@@ -57,8 +53,7 @@ const SpongebobRainbow = (props) => {
     );
 }
 
-/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-
+// // IfTheyCouldRead meme component
 const IfTheyCouldRead = (props) => {
     const { meme, style, className } = props;
 
@@ -81,8 +76,7 @@ const IfTheyCouldRead = (props) => {
     );
 }
 
-/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-
+// Spidermen meme component
 const Spidermen = (props) => {
     const { meme, style, className } = props;
 
@@ -103,8 +97,7 @@ const Spidermen = (props) => {
     );
 }
 
-/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-
+// Lisa meme component
 const Lisa = (props) => {
     const { meme, style, className } = props;
 
@@ -119,8 +112,7 @@ const Lisa = (props) => {
     );
 }
 
-/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-
+// SwimWaterBottle meme component
 const SwimWaterBottle = (props) => {
     const { meme, style, className } = props;
 
@@ -135,8 +127,7 @@ const SwimWaterBottle = (props) => {
     );
 }
 
-/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-
+// DistractedBoyfriend meme component
 const DistractedBoyfriend = (props) => {
     const { meme, style, className } = props;
 
@@ -165,8 +156,7 @@ const DistractedBoyfriend = (props) => {
     );
 }
 
-/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-
+// ExpandingBrain meme component
 const ExpandingBrain = (props) => {
     const { meme, style, className } = props;
 
@@ -192,8 +182,7 @@ const ExpandingBrain = (props) => {
     );
 }
 
-/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-
+// mapImagesComponents meme component
 const mapImagesComponents = {
     "drake.jpg": Drake,
     "spongebobRainbow.jpg": SpongebobRainbow,
@@ -204,5 +193,6 @@ const mapImagesComponents = {
     "distractedBoyfriend.jpg": DistractedBoyfriend,
     "expandingBrain.jpg": ExpandingBrain
 };
+
 
 export default MemeWrapper;
