@@ -1,4 +1,4 @@
-import { Modal, Button, Col, Row, Form } from 'react-bootstrap';
+import { Modal, Button, Col, Row, Form, Fade } from 'react-bootstrap';
 import MemeWrapper from './Memes';
 import { useState } from 'react';
 import ColorPicker from './ColorPicker';
@@ -60,6 +60,7 @@ const ModalCreate = (props) => {
     const [sentence2, setSentence2] = useState(selectedMeme ? selectedMeme.sentence2 : "");
     const [sentence3, setSentence3] = useState(selectedMeme ? selectedMeme.sentence3 : "");
     const [publ, setPubl] = useState(selectedMeme ? selectedMeme.public : false);
+    const [showErrMessage, setShowErrMessage] = useState(false);
 
     const template = selectedMeme ? selectedMeme.image : selectedTemplate;
     const meme = {
@@ -71,8 +72,15 @@ const ModalCreate = (props) => {
         // stop event default and propagation
         event.preventDefault();
         event.stopPropagation();
-        console.log(meme);
-        addMeme(meme);
+
+        if (title && (sentence1 || sentence2 || sentence3)) { // Form validation
+            setShowErrMessage(false);
+            console.log(meme);
+            addMeme(meme);
+        }
+        else {
+            setShowErrMessage(true);
+        }
     }
 
     const closeModal = () => {
@@ -100,7 +108,7 @@ const ModalCreate = (props) => {
 
     return (
         <Modal show={show} onHide={closeModal} size="xl" centered>
-            < Modal.Header closeButton className="m-1 p-1">
+            <Modal.Header closeButton className="m-1 p-1">
                 <Modal.Title className="d-flex align-items-center">Create your meme</Modal.Title>
             </Modal.Header >
             <Modal.Body className="m-1 p-0 ml-2">
@@ -110,7 +118,7 @@ const ModalCreate = (props) => {
                         <Form onSubmit={handleSubmit}>
                             <Modal.Body >
                                 <Form.Control type="text" placeholder="Title" value={title}
-                                    onChange={(ev) => setTitle(ev.target.value)} required autoFocus />
+                                    onChange={(ev) => { setShowErrMessage(false); setTitle(ev.target.value); }} />
                                 <br />
                                 <Row >
                                     <Col sm="1" className="d-flex align-items-center">
@@ -130,18 +138,18 @@ const ModalCreate = (props) => {
                                 <br />
                                 <Form.Group controlId="sentence1" >
                                     <Form.Control as="textarea" placeholder="Sentence 1" rows={3} className="resize-none"
-                                        value={sentence1} onChange={(ev) => setSentence1(ev.target.value)} required autoFocus
+                                        value={sentence1} onChange={(ev) => { setShowErrMessage(false); setSentence1(ev.target.value); }}
                                         maxLength={mapImagesNumSentences[meme.image] && mapImagesNumSentences[meme.image].ml} />
                                 </Form.Group>
                                 <Form.Group controlId="sentence2" >
                                     <Form.Control as="textarea" placeholder="Sentence 2" rows={3} className="resize-none"
-                                        value={sentence2} onChange={(ev) => setSentence2(ev.target.value)}
+                                        value={sentence2} onChange={(ev) => { setShowErrMessage(false); setSentence2(ev.target.value); }}
                                         disabled={mapImagesNumSentences[meme.image] && mapImagesNumSentences[meme.image].sentence2}
                                         maxLength={mapImagesNumSentences[meme.image] && mapImagesNumSentences[meme.image].ml} />
                                 </Form.Group>
                                 <Form.Group controlId="sentence3" >
                                     <Form.Control as="textarea" placeholder="Sentence 3" rows={3} className="resize-none"
-                                        value={sentence3} onChange={(ev) => setSentence3(ev.target.value)}
+                                        value={sentence3} onChange={(ev) => { setShowErrMessage(false); setSentence3(ev.target.value); }}
                                         disabled={mapImagesNumSentences[meme.image] && mapImagesNumSentences[meme.image].sentence3}
                                         maxLength={mapImagesNumSentences[meme.image] && mapImagesNumSentences[meme.image].ml} />
                                     <Form.Text muted className="text-center text-md-right">
@@ -153,6 +161,11 @@ const ModalCreate = (props) => {
                                         checked={publ} onChange={(ev) => setPubl(ev.target.checked)}
                                         disabled={selectedMeme && selectedMeme.public !== 1 && selectedMeme.creator !== user} />
                                 </Form.Group>
+                                <Fade in={showErrMessage}>
+                                    <Form.Control.Feedback type="invalid" tooltip
+                                        className={"m-4 " + (showErrMessage ? "d-inline" : "d-none")}>
+                                        Insert a title and at least a sentence</Form.Control.Feedback>
+                                </Fade>
                             </Modal.Body>
                             <Modal.Footer>
                                 <Button variant="secondary" type="submit">Post</Button>
@@ -160,7 +173,7 @@ const ModalCreate = (props) => {
                         </Form>
                     </Col>
                 </Row>
-            </Modal.Body>
+            </Modal.Body >
         </Modal >
     );
 }
