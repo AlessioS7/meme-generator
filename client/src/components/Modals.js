@@ -119,8 +119,8 @@ const ModalCreate = (props) => {
                                     <Col sm="7">
                                         <Form.Control as="select" value={font} onChange={(ev) => setFont(ev.target.value)}>
                                             <option>Arial</option>
-                                            <option>Cursive</option>
-                                            <option>Georgia</option>
+                                            <option>Charm</option>
+                                            <option>Kelly Slab</option>
                                         </Form.Control>
                                     </Col>
                                     <Col sm="1" className="d-flex align-items-center offset-2">
