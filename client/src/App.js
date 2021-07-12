@@ -48,7 +48,6 @@ const Main = () => {
   // show error message in toast
   const handleErrors = (err) => {
     setMessage({ msg: err.error, type: 'danger' });
-    console.log(err);
     setDirty(false); // in case of server error this is required to block the spinner and to show the error message 
   }
 
@@ -63,7 +62,6 @@ const Main = () => {
       } catch (err) {
         setUser(null);
         setLoggedIn(false);
-        console.log("No logged user"); // mostly unauthenticated user
       }
       changeRoute(window.location.pathname.substring(1));
     };
@@ -77,6 +75,7 @@ const Main = () => {
       .then(() => setDirty(true))
       .catch(e => handleErrors(e));
 
+    // closing the modal and backing to the home
     setShow(false);
     changeRoute("");
   }
@@ -86,6 +85,7 @@ const Main = () => {
       .then(() => setDirty(true))
       .catch(e => handleErrors(e));
 
+    // closing the modal
     setShow(false);
   }
 
@@ -96,6 +96,8 @@ const Main = () => {
         .then(memes => {
           setMemesList(memes);
           setDirty(false);
+
+          // In case there are not memes to load, we show a message to the user through a Toast
           if (route === "" && memes.length === 0) handleErrors({ error: "There are no memes to show." });
         })
         .catch(e => handleErrors(e));
@@ -105,7 +107,8 @@ const Main = () => {
   const handleLogIn = async (credentials) => {
     try {
       const user = await API.logIn(credentials);
-      changeRoute("");
+
+      changeRoute(""); // redirect to the home
       setUser(user);
       setLoggedIn(true);
       setDirty(true);

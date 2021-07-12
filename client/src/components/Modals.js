@@ -88,6 +88,7 @@ const ModalCreate = (props) => {
     }
 
     const closeModal = () => {
+        // resetting the states in case we want to reopen the modal with another template
         setTitle("");
         setFont("Arial")
         setTextColor({ displayColorPicker: false, color: { r: '0', g: '0', b: '0', a: '1' } });
@@ -96,10 +97,11 @@ const ModalCreate = (props) => {
         setSentence3("");
         setPubl(false);
 
-        cm();
+        cm(); // actually closing the modal
     }
 
-    // this object is useful to specify for every template the number of sentences it contains and the maximum number of characters per sentence
+    // this object is useful to specify for every template the number of sentences it
+    // contains and the maximum number of characters per sentence
     const mapImagesNumSentences = {
         "drake.jpg": { "sentence2": false, "sentence3": true, "ml": 150 },
         "spongebobRainbow.jpg": { "sentence2": false, "sentence3": true, "ml": 18 },

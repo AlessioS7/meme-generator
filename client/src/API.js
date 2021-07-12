@@ -70,7 +70,6 @@ async function getMemes() {
 
 async function addMeme(meme) {
     meme.fontColor = JSON.stringify(meme.fontColor);
-    console.log(JSON.stringify(meme));
     const response = await fetch('/api/memes', {
         method: 'POST',
         headers: {
