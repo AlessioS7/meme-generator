@@ -4,8 +4,6 @@
 const db = require('./db');
 const bcrypt = require('bcrypt');
 
-/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-
 exports.getUser = (username, password) => {
   return new Promise((resolve, reject) => {
     const sql = 'SELECT * FROM creators WHERE username = ?';
