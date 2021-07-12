@@ -42,7 +42,7 @@
 ## Database Tables
 
 - Table `creators` - contains all creators and has fields: username, hash
-- Table `memes` - contains all meames and has fields: id, title, image, sentence1, sentence2, sentence3, public, creator, font, fontColor
+- Table `memes` - contains all memes and has fields: id, title, image, sentence1, sentence2, sentence3, public, creator, font, fontColor
 
 ## Main React Components
 

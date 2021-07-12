@@ -117,15 +117,14 @@ const Main = () => {
       setDirty(true);
     }
     catch (err) {
-      // error is handled and visualized in the login form, do not manage error, throw it
-      //handleErrors(err)
+      // error is handled and visualized in the login form
       throw err;
     }
   }
 
   const handleLogOut = async () => {
     await API.logOut()
-    // clean up everything
+    // clean up states
     changeRoute("");
     setLoggedIn(false);
     setUser(null);

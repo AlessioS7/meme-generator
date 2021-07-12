@@ -89,14 +89,13 @@
   align-items: center;
   text-align: center;        
   position: absolute;
-  /* border: solid 2px gray; */
   overflow-wrap: break-word;   word-wrap: break-word;   hyphens: auto;
   text-shadow: -1px 0 black, 0 1px black, 1px 0 black, 0 -1px black;
 }
 
 .pos-sentence-drake {   
   height: 50%; 
-  left: 52%;
+  left: 53%;
   max-height: 47%;
   max-width: 42%;
   min-width: 42%;
