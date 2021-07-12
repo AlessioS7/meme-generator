@@ -10,22 +10,34 @@
 ## API Server
 
 - GET `/api/memes` (get list of memes)
-  - response body content: list of memes (all if authenticated, just public if not)
+  - request body content: none
+  - request parameters: none
+  - response body content: list of memes (all if authenticated, just public if not); error message in case of problems
 
 - POST `/api/memes` (insert a new meme)
   - request body content: meme's data
+  - request parameters: none
+  - response body content: none; error message in case of problems
 
 - DELETE `/api/memes/<id>` (delete meme id)
+  - request body content: none
   - request parameters: meme's id to be deleted
+  - response body content: none; error message in case of problems
 
 - POST `/api/sessions` (log in)
   - request body content: username and password
-  - response body content: username
+  - request parameters: none
+  - response body content: username; error message in case of problems
 
 - DELETE `/api/sessions/current` (log out)
+  - request body content: none  
+  - request parameters: none
+  - response body content: none
 
 - GET `/api/sessions` (check if logged in)
-  - response body content: username
+  - request body content: none
+  - request parameters: none
+  - response body content: username, ; error message in case of problems
 
 ## Database Tables
 
