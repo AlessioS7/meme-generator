@@ -3,7 +3,7 @@
 
 ## React Client Application Routes
 
-- Route `/`: home page which contains all public memes (also the protected ones if user logged in)
+- Route `/`: home page which contains all the public memes (also the protected ones if user logged in)
 - Route `/createMeme`: page which contains the list of meme templates and, after selecting one, it allows to create a personalized meme
 - Route `/login`: log in page
 
@@ -29,13 +29,13 @@
 
 ## Database Tables
 
-- Table `creators` - contains: username, hash
-- Table `memes` - contains: id, title, image, sentence1, sentence2, sentence3, public, creator, font, fontColor
+- Table `creators` - contains all creators and has fields: username, hash
+- Table `memes` - contains all meames and has fields: id, title, image, sentence1, sentence2, sentence3, public, creator, font, fontColor
 
 ## Main React Components
 
 - `Main` (in `App.js`): it is the main component which contains all the other major components, states and useEffects
-- `Navigation` (in `Navigation.js`): it is the component which displays the navigation bar
+- `Navigation` (in `Navigation.js`): it displays the navigation bar
 - `TemplatesList` (in `CreateMeme.js`): it displays the list of templates
 - `LoginForm` (in `Login.js`): it provides the form and functionalities to perform the log in
 - `MemeWrapper` (in `Memes.js`): it associates each meme with the right component which displays it correctly with the right sentences positions
@@ -49,6 +49,17 @@
 
 ## Users Credentials
 
-- Jack, imjackps
-- Noyze, aRandomPassword
-- xMarcoLux, 1234567
+- Jack
+  - Username: Jack
+  - Password: imjackps
+  - Created memes: "JS developer's mind", "No flame", "Every developer's mind" (copied from Noyze), "I'm the best meme template", "Incrementing a counter variable"
+
+- Noyze
+  - Username: Noyze
+  - Password: aRandomPassword
+  - Created memes: "Python developer's mind" (copied from Jack), "State of mind", "Recursion explanation"
+
+- xMarcoLux
+  - Username: xMarcoLux
+  - Password: 1234567
+  - Created memes: "Memes hierarchy", "Not caring about variable types", "Mood", "While loop explanation" (copied from Noyze)
