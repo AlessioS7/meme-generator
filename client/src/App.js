@@ -179,7 +179,7 @@ const Main = () => {
             <Row className="vh-100 below-nav">
               {(route !== "" && !loggedIn) && <Redirect to="/" />}
               <TemplatesList setSelectedTemplate={setSelectedTemplate} showModal={showModal} route={route} loggedIn={loggedIn} changeRoute={changeRoute} />
-              <Modals.ModalCreate show={show} selectedTemplate={selectedTemplate} cm={closeModal} user={user} addMeme={addMeme} selectedMeme={getMemeById(selectedMeme)} />
+              <Modals.ModalCreate show={show} selectedTemplate={selectedTemplate} cm={closeModal} user={user} addMeme={addMeme} selectedMeme={getMemeById(selectedMeme)} setSelectedMeme={setSelectedMeme} />
             </Row>
           </Route>
         </Switch>}

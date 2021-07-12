@@ -51,7 +51,7 @@ const ModalHome = (props) => {
 
 // Modal create component
 const ModalCreate = (props) => {
-    const { show, selectedTemplate, cm, user, addMeme, selectedMeme } = props;
+    const { show, selectedTemplate, cm, user, addMeme, selectedMeme, setSelectedMeme } = props;
     const [title, setTitle] = useState(selectedMeme ? selectedMeme.title : "");
     const [font, setFont] = useState(selectedMeme ? selectedMeme.font : "Arial");
     const color = selectedMeme ? selectedMeme.fontColor : { r: '0', g: '0', b: '0', a: '1' };
@@ -75,7 +75,7 @@ const ModalCreate = (props) => {
 
         if (title && (sentence1 || sentence2 || sentence3)) { // Form validation
             setShowErrMessage(false);
-            console.log(meme);
+            setSelectedMeme(null); // this line is needed to clear the modal for the next opening
             addMeme(meme);
         }
         else {
@@ -98,9 +98,9 @@ const ModalCreate = (props) => {
     const mapImagesNumSentences = {
         "drake.jpg": { "sentence2": false, "sentence3": true, "ml": 150 },
         "spongebobRainbow.jpg": { "sentence2": false, "sentence3": true, "ml": 18 },
-        "ifTheyCouldRead.png": { "sentence2": false, "sentence3": true, "ml": 27 },
+        "ifTheyCouldRead.png": { "sentence2": false, "sentence3": true, "ml": 28 },
         "spidermen.jpg": { "sentence2": false, "sentence3": true, "ml": 25 },
-        "lisa.jpg": { "sentence2": true, "sentence3": true, "ml": 48 },
+        "lisa.jpg": { "sentence2": true, "sentence3": true, "ml": 65 },
         "swimWaterBottle.jpg": { "sentence2": true, "sentence3": true, "ml": 50 },
         "distractedBoyfriend.jpg": { "sentence2": false, "sentence3": false, "ml": 30 },
         "expandingBrain.jpg": { "sentence2": false, "sentence3": false, "ml": 45 }
