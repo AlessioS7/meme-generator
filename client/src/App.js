@@ -63,9 +63,12 @@ const Main = () => {
         setUser(null);
         setLoggedIn(false);
       }
-      changeRoute(window.location.pathname.substring(1));
+      changeRoute(window.location.pathname.substring(1)); // to always have the route state up to date with the actual URL
     };
     checkAuth();
+
+    // next line comment is needed to disable a console warning
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   const getMemeById = id => memesList.filter(m => m.id === id)[0];
@@ -102,7 +105,7 @@ const Main = () => {
         })
         .catch(e => handleErrors(e));
     }
-  }, [dirty, loggedIn])
+  }, [dirty, loggedIn, route])
 
   const handleLogIn = async (credentials) => {
     try {

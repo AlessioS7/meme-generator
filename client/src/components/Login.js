@@ -67,6 +67,7 @@ function LoginForm(props) {
 
 // LogoutButton component
 function LogoutButton(props) {
+    // JSX
     return (
         <Button variant="secondary" onClick={props.logout}>Logout</Button>
     )
