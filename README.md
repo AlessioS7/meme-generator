@@ -1,5 +1,16 @@
-# Exam #2: "Meme Generator"
-## Student: s283502 SANTANGELO ALESSIO 
+# Web Application Exam: "Meme Generator"
+
+Project for the final exam in the Web Application I class, focusing on developing a social network to create and share memes.
+
+## Layout
+
+    .
+    ├── client          # Frontend application
+    ├── img             # Applcation screenshot
+    ├── server          # Backend application
+    └── README.md
+
+
 
 ## React Client Application Routes
 
@@ -59,7 +70,7 @@
 
 ![Screenshot](./img/CreateMemeForm.png)
 
-## Users Credentials
+## Users Test Credentials
 
 - Jack
   - Username: Jack
